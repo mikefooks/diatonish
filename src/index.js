@@ -7,6 +7,6 @@ import Things from "./music_theory";
 window.Things = Things;
 
 ReactDOM.render(
-    <App/>,
-    document.querySelector(".yo")
+  <App/>,
+  document.querySelector(".yo")  
 );

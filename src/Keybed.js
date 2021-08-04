@@ -1,5 +1,5 @@
 import React from "react";
-import Theory from "./music_theory";
+import Theory from "./Theory";
 
 class Keybed extends React.Component {
     render() {
