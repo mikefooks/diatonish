@@ -1,34 +1,82 @@
 import { List, Map } from "immutable";
 
-const keys = List.of("C_1", "Db_1", "D_1", "Eb_1", "E_1", "F_1", "Gb_1", "G_1", "Ab_1", "A_1", "Bb_1", "B_1",
-		     "C_1", "Db_1", "D_1", "Eb_1", "E_1", "F_1", "Gb_1", "G_1", "Ab_1", "A_1", "Bb_1", "B_1",
-		     "C_3");
-		     
+const noteNames = List.of(
+  "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B",
+);
 
-             const modes = Map({
-    "Ionian" : List.of(2, 2, 1, 2, 2, 2, 1),
-    "Dorian" : List.of(2, 1, 2, 2, 2, 1, 2),
-    "Phrygian" : List.of(1, 2, 2, 2, 1, 2, 2),
-    "Lydian" : List.of(2, 2, 2, 1, 2, 2, 1),
-    "Mixolydian" : List.of(2, 2, 1, 2, 2, 1, 2),
-    "Aeolian" : List.of(2, 1, 2, 2, 1, 2, 2),
-    "Locrian" : List.of(1, 2, 2, 1, 2, 2, 2)
-});
+const modeNames = List.of(
+  "Ionian",
+  "Dorian",
+  "Phrygian",
+  "Lydian",
+  "Mixolydian",
+  "Aeolian",
+  "Locrian"  
+);
+
+const modeFormulas = List([
+  [2, 2, 1, 2, 2, 2, 1],
+  [2, 1, 2, 2, 2, 1, 2],
+  [1, 2, 2, 2, 1, 2, 2],
+  [2, 2, 2, 1, 2, 2, 1],
+  [2, 2, 1, 2, 2, 1, 2],
+  [2, 1, 2, 2, 1, 2, 2],
+  [1, 2, 2, 1, 2, 2, 2]
+]);
+
+// rearrange the noteNames list to start from a given root.
+function getNotesFromRoot(root) {
+  let rootIdx = noteNames.indexOf(root);
+  let notesFromRoot = noteNames.takeLast(rootIdx);
+  return notesFromRoot.concat(noteNames.take(rootIdx));
+}
+
+function getKeyList(octaves, root) {
+  let keyNames = [];
+  let notesFromRoot = getNotesFromRoot(root);
+  for (let i = 0; i < octaves; i++) {
+    for (let note of notesFromRoot) {
+      keyNames.push(note + "_" + i);
+    }
+  }
+  return List(keyNames);
+}
+
+function getIntervals(octaves, modeIdx) {
+  let intervals = [];
+  let modeFormula = modeFormulas.get(modeIdx);
+
+  for (let i = 0; i < octaves; i++) {
+    for (let step of modeFormula) {
+      intervals.push(step);
+    }
+  }
+
+  return List(intervals).butLast();
+}
 
 // Get the particular keys in a mode/scale.
-function getKeys(mode) {
-    let modeIntervals = modes.get(mode);
-    let counter = 0;
-    let idxs = modeIntervals.reduce(function (a, b) {
-	    counter += b;
-        return a.push(counter);
-    }, List([ 0 ]));
+function getScale(octaves, modeIdx, root) {
+  let intervals = getIntervals(octaves, modeIdx)
+  let keyList = getKeyList(octaves, root);
 
-    return idxs;
+  let counter = 0;
+  let scale = []
+  let idxs = intervals.reduce(function (a, b) {
+	  counter += b;
+    return a.push(counter);
+  }, List([ 0 ]));
+
+  for (let i of idxs) {
+    scale.push(keyList.get(i));
+  }
+  
+  return List(scale);
 }
 
 export default {
-    keys,
-    modes,
-    getKeys
+  getNotesFromRoot,
+  getKeyList,
+  getIntervals,
+  getScale
 };

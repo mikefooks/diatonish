@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// import { createStore } from "redux";
+// import { Map } from "immutable";
+
 import App from "./App";
 
-import Things from "./music_theory";
+import Theory from "./Theory";
 
-window.Things = Things;
+window.Theory = Theory;
 
 ReactDOM.render(
   <App/>,
-  document.querySelector(".yo")  
+  document.querySelector(".app_container")  
 );

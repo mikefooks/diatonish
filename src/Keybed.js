@@ -1,17 +1,13 @@
 import React from "react";
-import Theory from "./Theory";
+// import Theory from "./Theory";
+// import Key from "./Key";
 
-class Keybed extends React.Component {
-    render() {
-        const keyNames = Theory.getKeys("Aeolian").map(val =>
-            <p>{ val }</p>    
-        );
-        return (
-            <div className="keybed">
-                { keyNames }
-            </div>
-        );
-    }
-}
+const Keybed = (props) => {
+    return (
+      <div className="keybed">
+        <p>hey</p>
+      </div>
+    );
+};
 
 export default Keybed;
