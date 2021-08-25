@@ -27,8 +27,10 @@ const modeFormulas = List([
 // rearrange the noteNames list to start from a given root.
 function getNotesFromRoot(root) {
   let rootIdx = noteNames.indexOf(root);
-  let notesFromRoot = noteNames.takeLast(rootIdx);
-  return notesFromRoot.concat(noteNames.take(rootIdx));
+  let front = noteNames.take(rootIdx);
+  let back = noteNames.takeLast(noteNames.size - rootIdx);
+
+  return back.concat(front);
 }
 
 function getKeyList(octaves, root) {
@@ -42,6 +44,10 @@ function getKeyList(octaves, root) {
   return List(keyNames);
 }
 
+/**
+ * @param  {} octaves
+ * @param  {} modeIdx
+ */
 function getIntervals(octaves, modeIdx) {
   let intervals = [];
   let modeFormula = modeFormulas.get(modeIdx);
@@ -74,7 +80,7 @@ function getScale(octaves, modeIdx, root) {
   return List(scale);
 }
 
-export default {
+export {
   getNotesFromRoot,
   getKeyList,
   getIntervals,

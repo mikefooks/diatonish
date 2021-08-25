@@ -7,7 +7,7 @@ import App from "./App";
 
 import Theory from "./Theory";
 
-window.Theory = Theory;
+// window.Theory = Theory;
 
 ReactDOM.render(
   <App/>,
