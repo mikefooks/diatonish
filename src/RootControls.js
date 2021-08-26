@@ -9,6 +9,13 @@ const RootSlider = (props) => {
                 onChange={ props.updateRoot }></input>
 };
 
+const RootOnBottomToggle = (props) => {
+  return <input id="rootOnBottom"
+                name="rootOnBottom"
+                type="checkbox"
+                onChange={ props.toggleRootOnBottom }></input>
+}
+
 const RootDisplay = (props) => {
   return <div className="rootDisplay">
     <h2>{ props.activeRoot }</h2>
@@ -17,5 +24,6 @@ const RootDisplay = (props) => {
 
 export {
   RootSlider,
+  RootOnBottomToggle,
   RootDisplay
 };

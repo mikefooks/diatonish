@@ -1,5 +1,8 @@
 import React from "react";
+import { Map } from "immutable";
+
 import { getKeyList } from "./Theory";
+
 
 const keyNames = getKeyList(4, "C");
 
@@ -54,11 +57,26 @@ const keyPaths = {
   "Bb_4": "M2660.5.5h80v400h-80z"
 };
 
+const rootTranslations = Map({
+  "C": 0,
+  "D": -100,
+  "E": -200,
+  "F": -300,
+  "G": -400,
+  "A": -500,
+  "B": -600,
+  "Db": -60,
+  "Eb": -160,
+  "Gb": -360,
+  "Ab": -460,
+  "Bb": -560
+});
+
 const Key = ({ keyId, blackKey, isActive }) => {
   
   function getFillColor(blackKey, isActive) {
     if (!isActive) {
-      return "#888";
+      return "url(#inactive_fill)";
     }
     return blackKey ? "#000" : "#fff";
   }
@@ -66,9 +84,8 @@ const Key = ({ keyId, blackKey, isActive }) => {
   return <path
     id={ "keybed_" + keyId }
     fill={ getFillColor(blackKey, isActive) }
-    className={ isActive ? "active" : "" }
     fillOpacity={1}
-    strokeWidth={1}
+    strokeWidth={ isActive ? 1 : 0 }
     strokeMiterlimit={4}
     strokeDasharray="none"
     strokeOpacity={1}
@@ -76,7 +93,7 @@ const Key = ({ keyId, blackKey, isActive }) => {
   />;
 }
 
-const SvgKeybed = ({ activeKeys }) => {
+const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
   const keys = Object.keys(keyPaths).map((val, idx) => {
     let isActive = activeKeys.includes(val);
 
@@ -92,9 +109,18 @@ const SvgKeybed = ({ activeKeys }) => {
       xmlns="http://www.w3.org/2000/svg"
       width={1400}
       height={600}
-      id="keybed"
-    >
-      <g id="keybed_group" stroke="#000">
+      id="keybed">
+      <pattern id="inactive_fill"
+           width="16" height="20"
+           patternUnits="userSpaceOnUse"
+           patternTransform="rotate(45 50 50)"
+           >
+        <line stroke="#676767" strokeWidth="12px" x1="6" x2="6" y2="20"/>             
+        <line stroke="#a6a6a6" strokeWidth="18px" x1="16" x2="16" y2="20"/>
+      </pattern>
+      <g id="keybed_group"
+         transform={ rootOnBottom ? "translate(" + rootTranslations.get(activeRoot) + ")" : "" } 
+         stroke="#000">
         { keys }
       </g>
     </svg>

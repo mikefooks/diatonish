@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Map } from "immutable";
 
 import SvgKeybed from "./SvgKeybed";
-import { RootSlider, RootDisplay } from "./RootControls";
+import { RootSlider, RootDisplay, RootOnBottomToggle } from "./RootControls";
 import { ModeSlider, ModeDisplay } from "./ModeControls";
 import { modeNames, circleOfFifths, getScale } from "./Theory";
 
@@ -13,11 +13,12 @@ const App = (props) => {
   // Setting up state store and defining default values.
   const [ state, setState ] = useState(Map({
     activeRoot: "Eb",
+    rootOnBottom: false,
     activeMode: 0,
     activeKeys: getScale(4, 0, "Eb")
   }));
 
-  // Updates the UI to reflect changes to the RootSlider input.
+  // Update the UI to reflect changes to the RootSlider input.
   function updateRoot(evt) {
     let noteIdx = evt.target.valueAsNumber;
     let noteName = circleOfFifths.get(noteIdx);
@@ -29,6 +30,11 @@ const App = (props) => {
     });
 
     setState(newState);
+  }
+
+  function toggleRootOnBottom(evt) {
+    console.log(evt.target.checked);
+    setState(state.set("rootOnBottom", evt.target.checked));
   }
 
   function updateMode(evt) {
@@ -45,8 +51,11 @@ const App = (props) => {
 
   return (
     <div id="appWindow">
-      <SvgKeybed activeKeys={ state.get("activeKeys") } />
+      <SvgKeybed activeRoot= { state.get("activeRoot") }
+                 activeKeys={ state.get("activeKeys") }
+                 rootOnBottom={ state.get("rootOnBottom") } />
       <div className="rootControls">
+        <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
         <RootSlider updateRoot={ updateRoot } />
         <RootDisplay activeRoot={ state.get("activeRoot") } />
       </div>
