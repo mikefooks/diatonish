@@ -4,9 +4,6 @@ import ReactDOM from "react-dom";
 // import { Map } from "immutable";
 
 import App from "./App";
-
-import Theory from "./Theory";
-
 // window.Theory = Theory;
 
 ReactDOM.render(

@@ -54,10 +54,11 @@ const keyPaths = {
   "Bb_4": "M2660.5.5h80v400h-80z"
 };
 
-const Key = ({ keyId, blackKey }) => {
+const Key = ({ keyId, blackKey, isActive }) => {
   return <path
     id={ "keybed_" + keyId }
     fill={ blackKey ? "#000" : "#fff" }
+    className={ isActive ? "active" : "" }
     fillOpacity={1}
     strokeWidth={1}
     strokeMiterlimit={4}
@@ -67,11 +68,14 @@ const Key = ({ keyId, blackKey }) => {
   />;
 }
 
-const SvgKeybed = (props) => {
+const SvgKeybed = ({ activeKeys }) => {
   const keys = Object.keys(keyPaths).map((val, idx) => {
+    let isActive = activeKeys.includes(val);
+
     return <Key
             keyId={ val }
             blackKey={ idx > 27 ? true : false }
+            isActive={ isActive }
            />;
   });
 

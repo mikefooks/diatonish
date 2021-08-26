@@ -44,10 +44,6 @@ function getKeyList(octaves, root) {
   return List(keyNames);
 }
 
-/**
- * @param  {} octaves
- * @param  {} modeIdx
- */
 function getIntervals(octaves, modeIdx) {
   let intervals = [];
   let modeFormula = modeFormulas.get(modeIdx);
@@ -81,6 +77,9 @@ function getScale(octaves, modeIdx, root) {
 }
 
 export {
+  noteNames,
+  modeNames,
+  modeFormulas,
   getNotesFromRoot,
   getKeyList,
   getIntervals,
