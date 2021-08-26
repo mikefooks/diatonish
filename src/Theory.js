@@ -1,7 +1,11 @@
 import { List, Map } from "immutable";
 
 const noteNames = List.of(
-  "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B",
+  "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
+);
+
+const circleOfFifths = List.of(
+  "C", "G", "D", "A", "E", "B", "Gb", "Db", "Ab", "Eb", "Bb", "F"
 );
 
 const modeNames = List.of(
@@ -78,6 +82,7 @@ function getScale(octaves, modeIdx, root) {
 
 export {
   noteNames,
+  circleOfFifths,
   modeNames,
   modeFormulas,
   getNotesFromRoot,

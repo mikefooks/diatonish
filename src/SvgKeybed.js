@@ -55,9 +55,17 @@ const keyPaths = {
 };
 
 const Key = ({ keyId, blackKey, isActive }) => {
+  
+  function getFillColor(blackKey, isActive) {
+    if (!isActive) {
+      return "#888";
+    }
+    return blackKey ? "#000" : "#fff";
+  }
+
   return <path
     id={ "keybed_" + keyId }
-    fill={ blackKey ? "#000" : "#fff" }
+    fill={ getFillColor(blackKey, isActive) }
     className={ isActive ? "active" : "" }
     fillOpacity={1}
     strokeWidth={1}
