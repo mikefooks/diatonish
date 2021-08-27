@@ -6,55 +6,55 @@ import { getKeyList } from "./Theory";
 
 const keyNames = getKeyList(4, "C");
 
-const keyPaths = {
-  "C_1": "M.5.5h100v600H.5z",
-  "D_1": "M100.5.5h100v600h-100z",
-  "E_1": "M200.5.5h100v600h-100z",
-  "F_1": "M300.5.5h100v600h-100z",
-  "G_1": "M400.5.5h100v600h-100z",
-  "A_1": "M500.5.5h100v600h-100z",
-  "B_1": "M600.5.5h100v600h-100z",
-  "C_2": "M700.5.5h100v600h-100z",
-  "D_2": "M800.5.5h100v600h-100z",
-  "E_2": "M900.5.5h100v600h-100z",
-  "F_2": "M1000.5.5h100v600h-100z", 
-  "G_2": "M1100.5.5h100v600h-100z",
-  "A_2": "M1200.5.5h100v600h-100z",
-  "B_2": "M1300.5.5h100v600h-100z",
-  "C_3": "M1400.5.5h100v600h-100z",
-  "D_3": "M1500.5.5h100v600h-100z",
-  "E_3": "M1600.5.5h100v600h-100z",
-  "F_3": "M1700.5.5h100v600h-100z",
-  "G_3": "M1800.5.5h100v600h-100z",
-  "A_3": "M1900.5.5h100v600h-100z",
-  "B_3": "M2000.5.5h100v600h-100z",
-  "C_4": "M2100.5.5h100v600h-100z",
-  "D_4": "M2200.5.5h100v600h-100z",
-  "E_4": "M2300.5.5h100v600h-100z",
-  "F_4": "M2400.5.5h100v600h-100z",
-  "G_4": "M2500.5.5h100v600h-100z",
-  "A_4": "M2600.5.5h100v600h-100z",
-  "B_4": "M2700.5.5h100v600h-100z",
-  "Db_1": "M60.5.5h80v400h-80z",
-  "Eb_1": "M160.5.5h80v400h-80z",
-  "Gb_1": "M360.5.5h80v400h-80z",
-  "Ab_1": "M460.5.5h80v400h-80z",
-  "Bb_1": "M560.5.5h80v400h-80z",
-  "Db_2": "M760.5.5h80v400h-80z",
-  "Eb_2": "M860.5.5h80v400h-80z",
-  "Gb_2": "M1060.5.5h80v400h-80z",
-  "Ab_2": "M1160.5.5h80v400h-80z",
-  "Bb_2": "M1260.5.5h80v400h-80z",
-  "Db_3": "M1460.5.5h80v400h-80z",
-  "Eb_3": "M1560.5.5h80v400h-80z",
-  "Gb_3": "M1760.5.5h80v400h-80z",
-  "Ab_3": "M1860.5.5h80v400h-80z",
-  "Bb_3": "M1960.5.5h80v400h-80z",
-  "Db_4": "M2160.5.5h80v400h-80z",
-  "Eb_4": "M2260.5.5h80v400h-80z",
-  "Gb_4": "M2460.5.5h80v400h-80z",
-  "Ab_4": "M2560.5.5h80v400h-80z",
-  "Bb_4": "M2660.5.5h80v400h-80z"
+const xTranslations = {
+  "C_1": "0",
+  "D_1": "100",
+  "E_1": "200",
+  "F_1": "300",
+  "G_1": "400",
+  "A_1": "500",
+  "B_1": "600",
+  "C_2": "700",
+  "D_2": "800",
+  "E_2": "900",
+  "F_2": "1000",
+  "G_2": "1100",
+  "A_2": "1200",
+  "B_2": "1300",
+  "C_3": "1400",
+  "D_3": "1500",
+  "E_3": "1600",
+  "F_3": "1700",
+  "G_3": "1800",
+  "A_3": "1900",
+  "B_3": "2000",
+  "C_4": "2100",
+  "D_4": "2200",
+  "E_4": "2300",
+  "F_4": "2400",
+  "G_4": "2500",
+  "A_4": "2600",
+  "B_4": "2700",
+  "Db_1": "60",
+  "Eb_1": "160",
+  "Gb_1": "360",
+  "Ab_1": "460",
+  "Bb_1": "560",
+  "Db_2": "760",
+  "Eb_2": "860",
+  "Gb_2": "1060",
+  "Ab_2": "1160",
+  "Bb_2": "1260",
+  "Db_3": "1460",
+  "Eb_3": "1560",
+  "Gb_3": "1760",
+  "Ab_3": "1860",
+  "Bb_3": "1960",
+  "Db_4": "2160",
+  "Eb_4": "2260",
+  "Gb_4": "2460",
+  "Ab_4": "2560",
+  "Bb_4": "2660",
 };
 
 const rootTranslations = Map({
@@ -81,20 +81,45 @@ const Key = ({ keyId, blackKey, isActive }) => {
     return blackKey ? "#000" : "#fff";
   }
 
-  return <path
-    id={ "keybed_" + keyId }
-    fill={ getFillColor(blackKey, isActive) }
-    fillOpacity={1}
-    strokeWidth={ isActive ? 1 : 0 }
-    strokeMiterlimit={4}
-    strokeDasharray="none"
-    strokeOpacity={1}
-    d={ keyPaths[keyId] }
-  />;
+  function textElRender(keyId, isActive, blackKey) {
+    if (!isActive) {
+      return null;
+    }
+    return (
+      <text
+        x="40%"
+        y="80%"
+        fill={ blackKey ? "#fff" : "#000" }>
+          { keyId.split("_")[0] }
+      </text>
+    );
+  }
+
+  return (
+    <svg 
+      x={ xTranslations[keyId] }
+      y={ 0 }
+      width={ blackKey ? 80 : 100 }
+      height={ blackKey ? 400 : 600 }>
+      <rect
+        id={ "key_" + keyId }
+        width="100%"
+        height="100%"
+        x={ 0 }
+        y={ 0 }
+        fill={ getFillColor(blackKey, isActive) }
+        fillOpacity={1}
+        strokeWidth={ isActive ? 1 : 0 }
+        strokeMiterlimit={4}
+        strokeDasharray="none"
+        strokeOpacity={1}/>
+        { textElRender(keyId, isActive, blackKey) }
+    </svg>
+  );
 }
 
 const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
-  const keys = Object.keys(keyPaths).map((val, idx) => {
+  const keys = Object.keys(xTranslations).map((val, idx) => {
     let isActive = activeKeys.includes(val);
 
     return <Key
@@ -109,6 +134,7 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
       xmlns="http://www.w3.org/2000/svg"
       width={1400}
       height={600}
+      viewBox="0 0 1400 600"
       id="keybed">
       <pattern id="inactive_fill"
            width="16" height="20"
