@@ -1,12 +1,31 @@
 import { List, Map } from "immutable";
 
-const noteNames = List.of(
-  "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
-);
+const noteList = List([
+  ["B#", "C", null],
+  ["C#", null, "Db"],
+  [null, "D", null],
+  ["D#", null, "Eb"],
+  [null, "E", "Fb"],
+  ["E#", "F", null],
+  ["F#", null, "Gb"],
+  [null, "G", null],
+  ["G#", null, "Ab"],
+  [null, "A", null],
+  ["A#", null, "Bb"],
+  [null, "B", "Cb"]
+]);
 
 const circleOfFifths = List.of(
-  "C", "G", "D", "A", "E", "B", "Gb", "Db", "Ab", "Eb", "Bb", "F"
+  0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
 );
+
+const sharpKeys = List.of(
+  0, 7, 2, 9, 4, 11
+);
+
+const flatKeys = List.of(
+  6, 1, 8, 3, 10, 5   
+)
 
 const modeNames = List.of(
   "Ionian",
@@ -29,23 +48,24 @@ const modeFormulas = List([
 ]);
 
 // rearrange the noteNames list to start from a given root.
-function getNotesFromRoot(root) {
-  let rootIdx = noteNames.indexOf(root);
-  let front = noteNames.take(rootIdx);
-  let back = noteNames.takeLast(noteNames.size - rootIdx);
+function getNotesFromRoot(rootIdx) {
+  let back = noteList.takeLast(12 - rootIdx);
+  let front = noteList.take(rootIdx);
 
   return back.concat(front);
 }
 
 function getKeyList(octaves, root) {
-  let keyNames = [];
+  let keyList = [];
   let notesFromRoot = getNotesFromRoot(root);
+
   for (let i = 0; i < octaves; i++) {
     for (let note of notesFromRoot) {
-      keyNames.push(note + "_" + i);
+      keyList.push(note);
     }
   }
-  return List(keyNames);
+
+  return List(keyList);
 }
 
 function getIntervals(octaves, modeIdx) {
@@ -58,30 +78,43 @@ function getIntervals(octaves, modeIdx) {
     }
   }
 
-  return List(intervals).butLast();
+  return List(intervals);
 }
 
 // Get the particular keys in a mode/scale.
-function getScale(octaves, modeIdx, root) {
-  let intervals = getIntervals(octaves, modeIdx)
-  let keyList = getKeyList(octaves, root);
+function getScale(octaves, root, modeIdx) {
+  let intervals = getIntervals(octaves, modeIdx);
+  let sharp = sharpKeys.indexOf(root) > 0 ? true : false;
 
-  let counter = 0;
-  let scale = []
-  let idxs = intervals.reduce(function (a, b) {
-	  counter += b;
-    return a.push(counter);
-  }, List([ 0 ]));
+  let counter = root;
+  let scale = [];
 
-  for (let i of idxs) {
-    scale.push(keyList.get(i));
+  for (let i = 0; i < intervals.size; i++) {
+    let key = noteList.get(counter % 12);
+    let keyName;
+
+    if (!key[1]) {
+      if (sharp) {
+        keyName = key[0];
+      } else {
+        keyName = key[2];
+      }
+    } else {
+      keyName = key[1];
+    }
+
+    scale.push([counter, keyName]);
+
+    counter = (counter + intervals.get(i)) % (octaves * 12);
   }
   
   return List(scale);
 }
 
-export {
-  noteNames,
+
+export default {
+  noteList,
+  sharpKeys,
   circleOfFifths,
   modeNames,
   modeFormulas,
