@@ -19,13 +19,14 @@ const circleOfFifths = List.of(
   0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
 );
 
+// roots for which the major scale deals in sharps
 const sharpKeys = List.of(
   0, 7, 2, 9, 4, 11
 );
 
 const flatKeys = List.of(
-  6, 1, 8, 3, 10, 5   
-)
+  6, 1, 8, 3, 10, 5
+);
 
 const modeNames = List.of(
   "Ionian",
@@ -46,6 +47,17 @@ const modeFormulas = List([
   [2, 1, 2, 2, 1, 2, 2],
   [1, 2, 2, 1, 2, 2, 2]
 ]);
+
+// A hacky way for figuring out whether a scale should
+// be interpreted in terms of sharps or flats.
+const firstThreeNotesToSharp = {
+  "013": false,
+  "023": false,
+  "024": true,
+  "124": true,
+  "134": true,
+  "135": false, // special case--could also be interpreted as sharp.
+};
 
 // rearrange the noteNames list to start from a given root.
 function getNotesFromRoot(rootIdx) {
@@ -83,34 +95,41 @@ function getIntervals(octaves, modeIdx) {
 
 // Get the particular keys in a mode/scale.
 function getScale(octaves, root, modeIdx) {
+  let firstThreeNotes, sharp;
+  
   let intervals = getIntervals(octaves, modeIdx);
-  let sharp = sharpKeys.indexOf(root) > 0 ? true : false;
 
-  let counter = root;
+  let counter = root + modeIdx;
   let scale = [];
 
   for (let i = 0; i < intervals.size; i++) {
-    let key = noteList.get(counter % 12);
-    let keyName;
-
-    if (!key[1]) {
-      if (sharp) {
-        keyName = key[0];
-      } else {
-        keyName = key[2];
-      }
-    } else {
-      keyName = key[1];
-    }
-
-    scale.push([counter, keyName]);
-
+    scale.push({ keyIdx: counter });
     counter = (counter + intervals.get(i)) % (octaves * 12);
   }
   
+  scale.sort((a, b) => a.keyIdx - b.keyIdx);
+
+  firstThreeNotes = scale.slice(0, 3)
+    .map(val => val.keyIdx)
+    .join("");
+  sharp = firstThreeNotesToSharp[firstThreeNotes];
+
+  for (let degree of scale) {
+    let note = noteList.get(degree.keyIdx % 12);
+    let keyName
+    if (!note[1]) {
+      if (sharp) {
+        keyName = note[0];
+      } else {
+        keyName = note[2];
+      }
+    } else {
+      keyName = note[1];
+    }
+    degree["keyName"] = keyName;
+  }
   return List(scale);
 }
-
 
 export default {
   noteList,
