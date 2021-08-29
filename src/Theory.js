@@ -44,7 +44,7 @@ const modeFormulas = List([
 const firstThreeNotesToSharp = {
   "013": false,
   "023": false,
-  "024": true,
+  "024": false,
   "124": true,
   "134": true,
   "135": false, // special case--could also be interpreted as sharp.
@@ -89,7 +89,7 @@ function getScale(octaves, root, modeIdx) {
   let firstThreeNotes, sharp;
   
   let intervals = getIntervals(octaves, modeIdx);
-  let counter = root + modeIdx;
+  let counter = root;
   let scale = [];
 
   for (let i = 0; i < intervals.size; i++) {

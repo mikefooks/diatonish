@@ -40,6 +40,9 @@ const App = (props) => {
     let newMode = evt.target.valueAsNumber;
     let newScale = getScale(defaultOctaves, state.get("activeRoot"), newMode);
 
+    console.log(newMode);
+    console.log(newScale);
+
     let newState = state.merge({
       activeMode: newMode,
       activeKeys: newScale
