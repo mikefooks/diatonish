@@ -2,7 +2,6 @@ import React from "react";
 import { Map } from "immutable";
 
 import Key from "./Key";
-import { xTranslations, xTranslate } from "./xTranslations";
 
 
 const renderOrder = [
@@ -10,26 +9,8 @@ const renderOrder = [
   1, 3, 6, 8, 10 // black keys
 ];
 
-function isBlack(keyId) {
-  if ((keyId % 12) <= 4) {
-    if (keyId % 2 == 0) {
-      return false;
-    } else {
-      return true;
-    }
-  } else {
-    if (keyId % 2 == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
-
 const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
   const defaultOctaves = 4;
-
-  window.activeKeys = activeKeys;
 
   let keyIds = [];
   for (let i = 0; i < defaultOctaves; i++) {

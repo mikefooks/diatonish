@@ -19,15 +19,6 @@ const circleOfFifths = List.of(
   0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
 );
 
-// roots for which the major scale deals in sharps
-const sharpKeys = List.of(
-  0, 7, 2, 9, 4, 11
-);
-
-const flatKeys = List.of(
-  6, 1, 8, 3, 10, 5
-);
-
 const modeNames = List.of(
   "Ionian",
   "Dorian",
@@ -131,7 +122,6 @@ function getScale(octaves, root, modeIdx) {
 
 export {
   noteList,
-  sharpKeys,
   circleOfFifths,
   modeNames,
   modeFormulas,

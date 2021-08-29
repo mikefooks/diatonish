@@ -7,6 +7,7 @@ import { RootSlider, RootDisplay, RootOnBottomToggle } from "./RootControls";
 import { ModeSlider, ModeDisplay } from "./ModeControls";
 import { modeNames, circleOfFifths, getScale } from "./Theory";
 
+
 const defaultOctaves = 4;
 
 const App = (props) => {
@@ -21,11 +22,10 @@ const App = (props) => {
   // Update the UI to reflect changes to the RootSlider input.
   function updateRoot(evt) {
     let noteIdx = evt.target.valueAsNumber;
-    let noteName = circleOfFifths.get(noteIdx);
-    let newScale = getScale(defaultOctaves, state.get("activeMode"), noteName);
+    let newScale = getScale(defaultOctaves, noteIdx, state.get("activeMode"));
 
     let newState = state.merge({
-      activeRoot: noteName,
+      activeRoot: noteIdx,
       activeKeys: newScale
     });
 
@@ -38,7 +38,7 @@ const App = (props) => {
 
   function updateMode(evt) {
     let newMode = evt.target.valueAsNumber;
-    let newScale = getScale(defaultOctaves, newMode, state.get("activeRoot"));
+    let newScale = getScale(defaultOctaves, state.get("activeRoot"), newMode);
 
     let newState = state.merge({
       activeMode: newMode,
