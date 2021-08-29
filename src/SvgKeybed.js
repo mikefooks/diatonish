@@ -1,7 +1,6 @@
 import React from "react";
 import { Map } from "immutable";
 
-import Theory from "./Theory";
 import Key from "./Key";
 import { xTranslations, xTranslate } from "./xTranslations";
 
@@ -32,25 +31,21 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
 
   window.activeKeys = activeKeys;
 
-  let keys = [];
+  let keyIds = [];
   for (let i = 0; i < defaultOctaves; i++) {
     for (let j = 0; j < 12; j++) {
-      keys.push(renderOrder[j] + (12 * i));
+      keyIds.push(renderOrder[j] + (12 * i));
     }
   }
 
-  console.log(keys);
-
-  /*
-  const keys = xTranslations.map((key, val) => {
-    let isActive = activeKeys.includes(key);
+  const keyEls = keyIds.map((key, idx) => {
+    let isActive = activeKeys.hasOwnProperty(key);
     return <Key
-            keyId={ val }
-            blackKey={ idx > 27 ? true : false }
+            keyId={ key }
+            keyName={ activeKeys[key] }
             isActive={ isActive }
            />;
   });
-  */
 
   return (
     <svg
@@ -70,13 +65,11 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
       <g id="keybed_group"
          transform={ rootOnBottom ? "translate(" + rootTranslations.get(activeRoot) + ")" : "" } 
          stroke="#000">
-        { keys }
+        { keyEls }
       </g>
     </svg>
   );
 }
-
-
 
 const rootTranslations = Map({
   "C": 0,

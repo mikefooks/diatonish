@@ -1,6 +1,6 @@
 import { OrderedMap } from "immutable";
 
-const xTranslations = OrderedMap({
+const xTranslations = {
   0: 0,
   2: 100,
   4: 200,
@@ -13,13 +13,13 @@ const xTranslations = OrderedMap({
   6: 360,
   8: 460,
   10: 560
-});
+};
 
 function xTranslate(keyId) {
   let key = keyId % 12;
   let octave = Math.floor(keyId / 12);
 
-  return xTranslations.get(key) + (octave * 700);
+  return xTranslations[key] + (octave * 700);
 }
 
 export {

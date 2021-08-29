@@ -49,7 +49,7 @@ const modeFormulas = List([
 ]);
 
 // A hacky way for figuring out whether a scale should
-// be interpreted in terms of sharps or flats.
+// be interpreted in terms of sharps or flats. true denotes sharp.
 const firstThreeNotesToSharp = {
   "013": false,
   "023": false,
@@ -98,24 +98,21 @@ function getScale(octaves, root, modeIdx) {
   let firstThreeNotes, sharp;
   
   let intervals = getIntervals(octaves, modeIdx);
-
   let counter = root + modeIdx;
   let scale = [];
 
   for (let i = 0; i < intervals.size; i++) {
-    scale.push({ keyIdx: counter });
+    scale.push(counter);
     counter = (counter + intervals.get(i)) % (octaves * 12);
-  }
-  
-  scale.sort((a, b) => a.keyIdx - b.keyIdx);
+  } 
+  scale.sort((a, b) => a - b);
 
-  firstThreeNotes = scale.slice(0, 3)
-    .map(val => val.keyIdx)
-    .join("");
+  firstThreeNotes = scale.slice(0, 3).join("");
   sharp = firstThreeNotesToSharp[firstThreeNotes];
 
-  for (let degree of scale) {
-    let note = noteList.get(degree.keyIdx % 12);
+  let scaleMap = {};
+  for (let key of scale) {
+    let note = noteList.get(key % 12);
     let keyName
     if (!note[1]) {
       if (sharp) {
@@ -126,9 +123,10 @@ function getScale(octaves, root, modeIdx) {
     } else {
       keyName = note[1];
     }
-    degree["keyName"] = keyName;
+    scaleMap[key] = keyName; 
   }
-  return scale;
+
+  return scaleMap;
 }
 
 export {

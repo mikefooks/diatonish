@@ -24,10 +24,10 @@ function textElRender(keyId, isActive, blackKey) {
   );
 }
 
-const Key = ({ keyId, keyName, blackKey, isActive }) => {
+const Key = ({ keyId, keyName, isActive, blackKey }) => {
   return (
     <svg 
-      x={ xTranslations[keyId] }
+      x={ xTranslate(keyId) }
       y={ 0 }
       width={ blackKey ? 80 : 100 }
       height={ blackKey ? 400 : 600 }>
