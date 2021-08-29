@@ -128,10 +128,10 @@ function getScale(octaves, root, modeIdx) {
     }
     degree["keyName"] = keyName;
   }
-  return List(scale);
+  return scale;
 }
 
-export default {
+export {
   noteList,
   sharpKeys,
   circleOfFifths,

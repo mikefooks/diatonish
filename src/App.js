@@ -9,15 +9,6 @@ import { modeNames, circleOfFifths, getScale } from "./Theory";
 
 const defaultOctaves = 4;
 
-const App = (props) => {
-  // Setting up state store and defining default values.
-  const [ state, setState ] = useState(Map({
-    activeRoot: "Eb",
-    rootOnBottom: false,
-    activeMode: 0,
-    activeKeys: getScale(4, 0, "Eb")
-  }));
-
   // Update the UI to reflect changes to the RootSlider input.
   function updateRoot(evt) {
     let noteIdx = evt.target.valueAsNumber;
@@ -33,7 +24,6 @@ const App = (props) => {
   }
 
   function toggleRootOnBottom(evt) {
-    console.log(evt.target.checked);
     setState(state.set("rootOnBottom", evt.target.checked));
   }
 
@@ -48,6 +38,15 @@ const App = (props) => {
 
     setState(newState);
   }
+
+const App = (props) => {
+  // Setting up state store and defining default values.
+  const [ state, setState ] = useState(Map({
+    activeRoot: 0,
+    rootOnBottom: false,
+    activeMode: 0,
+    activeKeys: getScale(defaultOctaves, 0, 0)
+  }));
 
   return (
     <div id="appWindow">
