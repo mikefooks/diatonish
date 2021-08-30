@@ -1,5 +1,15 @@
-const config = {
-  defaultOctaves: 4
+import { getScale } from "./Theory";
+
+const defaultOctaves = 4;
+
+const defaultState = {
+  activeRoot: 0,
+  rootOnBottom: false,
+  activeMode: 0,
+  activeKeys: getScale(defaultOctaves, 0, 0)
 };
 
-export default config;
+export {
+  defaultOctaves,
+  defaultState
+};

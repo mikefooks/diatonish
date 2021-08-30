@@ -1,20 +1,5 @@
-import { List, Map } from "immutable";
-
-
-const noteList = [
-  ["B#", "C", null],
-  ["C#", null, "Db"],
-  [null, "D", null],
-  ["D#", null, "Eb"],
-  [null, "E", "Fb"],
-  ["E#", "F", null],
-  ["F#", null, "Gb"],
-  [null, "G", null],
-  ["G#", null, "Ab"],
-  [null, "A", null],
-  ["A#", null, "Bb"],
-  [null, "B", "Cb"]
-];                                                          
+import { List } from "immutable";
+                                                        
 
 const keySignatures = [
   { root: 0, 
@@ -60,15 +45,12 @@ const keySignatures = [
     names: [ "C", "D", "E", "F", "G", "A", "Bb" ]} // F major / D minor (1 flat)
 ];
 
-// need a function (root, modeIdx) that outputs the correct key signature
-// from above.
-
 const modeAdditions = [
-  0, 2, 4, 5, 7, 9, 11 
+  0, 10, 8, 7, 5, 3, 1 
 ];
 
 function getModeAdjustedSignature(root, modeIdx) {
-  let adjustedRoot = Math.abs((root - modeAdditions[modeIdx])); // % 12?
+  let adjustedRoot = Math.abs((root + modeAdditions[modeIdx]) % 12);
   return keySignatures.find(item => item.root == adjustedRoot);
 }
 
@@ -86,120 +68,27 @@ const modeNames = List.of(
   "Locrian"  
 );
 
-const modeFormulas = List([
-  [2, 2, 1, 2, 2, 2, 1],
-  [2, 1, 2, 2, 2, 1, 2],
-  [1, 2, 2, 2, 1, 2, 2],
-  [2, 2, 2, 1, 2, 2, 1],
-  [2, 2, 1, 2, 2, 1, 2],
-  [2, 1, 2, 2, 1, 2, 2],
-  [1, 2, 2, 1, 2, 2, 2]
-]);
-
-// A hacky way for figuring out whether a scale should
-// be interpreted in terms of sharps or flats. true denotes sharp.
-const firstThreeNotesToSharp = {
-  "013": false,
-  "023": false,
-  "024": false,
-  "124": true,
-  "134": true,
-  "135": false, // special case--could also be interpreted as sharp.
-};
-
-// rearrange the noteNames list to start from a given root.
-function getNotesFromRoot(rootIdx) {
-  let back = noteList.takeLast(12 - rootIdx);
-  let front = noteList.take(rootIdx);
-
-  return back.concat(front);
-}
-
-function getKeyList(octaves, root) {
-  let keyList = [];
-  let notesFromRoot = getNotesFromRoot(root);
-
-  for (let i = 0; i < octaves; i++) {
-    for (let note of notesFromRoot) {
-      keyList.push(note);
-    }
-  }
-
-  return List(keyList);
-}
-
-function getIntervals(octaves, modeIdx) {
-  let intervals = [];
-  let modeFormula = modeFormulas.get(modeIdx);
-
-  for (let i = 0; i < octaves; i++) {
-    for (let step of modeFormula) {
-      intervals.push(step);
-    }
-  }
-
-  return List(intervals);
-}
-
 // Get the particular keys in a mode/scale.
 // TODO: make this less convoluted.
 function getScale(octaves, root, modeIdx) {
   let scale = {};
   let keySig = getModeAdjustedSignature(root, modeIdx);
 
+  console.log(keySig);
+
   for (let i = 0; i < octaves; i++) {
     for (let j = 0; j < 7; j++) {
       let keyIndex = keySig.sig[j] + (i*12);
       scale[keyIndex] = keySig.names[j];
-      console.log(keyIndex);
     }
   }
 
   return scale;
-
-  /*
-  let firstThreeNotes, sharp;
-  
-  let intervals = getIntervals(octaves, modeIdx);
-  let counter = root;
-  let scale = [];
-
-  for (let i = 0; i < intervals.size; i++) {
-    scale.push(counter);
-    counter = (counter + intervals.get(i)) % (octaves * 12);
-  } 
-  scale.sort((a, b) => a - b);
-
-  firstThreeNotes = scale.slice(0, 3).join("");
-  sharp = firstThreeNotesToSharp[firstThreeNotes];
-
-  let scaleMap = {};
-  for (let key of scale) {
-    let note = noteList.get(key % 12);
-    let keyName
-    if (!note[1]) {
-      if (sharp) {
-        keyName = note[0];
-      } else {
-        keyName = note[2];
-      }
-    } else {
-      keyName = note[1];
-    }
-    scaleMap[key] = keyName; 
-  }
-
-  return scaleMap;
-  */
 }
 
 export {
-  noteList,
+  keySignatures,
   circleOfFifths,
   modeNames,
-  modeFormulas,
-  getNotesFromRoot,
-  getKeyList,
-  getIntervals,
   getScale
 };
