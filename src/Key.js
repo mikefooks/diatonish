@@ -8,23 +8,6 @@ const blackKeys = [ 1, 3, 6, 8, 10 ];
 function isBlack(keyId) {
   return blackKeys.includes(keyId % 12);
 }
-/*
-function isBlack(keyId) {
-  if ((keyId % 12) <= 4) {
-    if (keyId % 2 == 0) {
-      return false;
-    } else {
-      return true;
-    }
-  } else {
-    if (keyId % 2 == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
-*/
 
 function getFillColor(blackKey, isActive) {
   if (!isActive) {

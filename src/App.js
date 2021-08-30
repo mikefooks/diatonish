@@ -2,27 +2,29 @@ import React from "react";
 import { useState } from "react";
 import { Map } from "immutable";
 
+// config and utilities.
+import config from "./config";
+import { modeNames, circleOfFifths, getScale } from "./Theory";
+
+// components
 import SvgKeybed from "./SvgKeybed";
 import { RootSlider, RootDisplay, RootOnBottomToggle } from "./RootControls";
 import { ModeSlider, ModeDisplay } from "./ModeControls";
-import { modeNames, circleOfFifths, getScale } from "./Theory";
 
-
-const defaultOctaves = 4;
 
 const App = (props) => {
   // Setting up state store and defining default values.
   const [ state, setState ] = useState(Map({
     activeRoot: 0,
     rootOnBottom: false,
-    activeMode: 0,
-    activeKeys: getScale(defaultOctaves, 0, 0)
+    activeMode: 4,
+    activeKeys: getScale(config.defaultOctaves, 0, 4)
   }));
 
   // Update the UI to reflect changes to the RootSlider input.
   function updateRoot(evt) {
     let noteIdx = evt.target.valueAsNumber;
-    let newScale = getScale(defaultOctaves, noteIdx, state.get("activeMode"));
+    let newScale = getScale(config.defaultOctaves, noteIdx, state.get("activeMode"));
 
     let newState = state.merge({
       activeRoot: noteIdx,
@@ -39,9 +41,6 @@ const App = (props) => {
   function updateMode(evt) {
     let newMode = evt.target.valueAsNumber;
     let newScale = getScale(defaultOctaves, state.get("activeRoot"), newMode);
-
-    console.log(newMode);
-    console.log(newScale);
 
     let newState = state.merge({
       activeMode: newMode,
