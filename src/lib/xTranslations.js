@@ -1,5 +1,3 @@
-import { OrderedMap } from "immutable";
-
 const xTranslations = {
   0: 0,
   2: 100,

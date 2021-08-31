@@ -1,6 +1,6 @@
 import React from "react";
 
-import { xTranslations, xTranslate } from "./xTranslations";
+import { xTranslate } from "../lib/xTranslations";
 
 
 const blackKeys = [ 1, 3, 6, 8, 10 ];

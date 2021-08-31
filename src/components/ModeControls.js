@@ -4,6 +4,7 @@ const ModeSlider = (props) => {
   return <input id="mode"
                 name="mode"
                 type="range"
+                value={ props.activeMode }
                 min="0"
                 max="6"
                 onChange={ props.updateMode }></input>;

@@ -4,12 +4,12 @@ import { Map } from "immutable";
 
 // config and utilities.
 import { defaultOctaves, defaultState } from "./config";
-import { modeNames, getScale } from "./Theory";
+import { modeNames, getScale } from "./lib/Theory";
 
 // components
-import SvgKeybed from "./SvgKeybed";
-import { RootSlider, RootDisplay, RootOnBottomToggle } from "./RootControls";
-import { ModeSlider, ModeDisplay } from "./ModeControls";
+import SvgKeybed from "./components/SvgKeybed";
+import { RootSlider, RootDisplay, RootOnBottomToggle } from "./components/RootControls";
+import { ModeSlider, ModeDisplay } from "./components/ModeControls";
 
 
 const App = (props) => {
@@ -22,9 +22,11 @@ const App = (props) => {
     activeKeys: Object ({ keyId (int) : keyName (String) }),
   }
   */
+
+  // Note: defaultState getting wrapped in an Immutable Map.
   const [ state, setState ] = useState(Map(defaultState));
 
-  // Update the UI to reflect changes to the RootSlider input.
+  // Handler fn to reflect changes to the RootSlider input.
   function updateRoot(evt) {
     let noteIdx = evt.target.valueAsNumber;
     let newScale = getScale(defaultOctaves, noteIdx, state.get("activeMode"));
@@ -41,14 +43,9 @@ const App = (props) => {
     setState(state.set("rootOnBottom", evt.target.checked));
   }
 
+  // Handler fn to reflect changes to the RootSlider input.
   function updateMode(evt) {
     let newMode = evt.target.valueAsNumber;
-    let scaleArgs = [ defaultOctaves,
-                      state.get("activeRoot"),
-                      newMode ];
-    
-    console.log(scaleArgs);
-    
     let newScale = getScale(defaultOctaves,
                             state.get("activeRoot"),
                             newMode);
@@ -68,12 +65,14 @@ const App = (props) => {
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div className="rootControls">
         <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
-        <RootSlider updateRoot={ updateRoot } />
+        <RootSlider activeRoot={ state.get("activeRoot") }
+                    updateRoot={ updateRoot } />
         <RootDisplay activeRoot={ state.get("activeRoot") } />
       </div>
       <div className="modeControls">
-        <ModeSlider updateMode={ updateMode } />
-        <ModeDisplay activeMode={ modeNames.get(state.get("activeMode")) } />
+        <ModeSlider activeMode={ state.get("activeMode") }
+                    updateMode={ updateMode } />
+        <ModeDisplay activeMode={ modeNames[state.get("activeMode")] } />
       </div>
     </div>
   );

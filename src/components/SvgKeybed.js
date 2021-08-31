@@ -19,7 +19,7 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
     }
   }
 
-  const keyEls = keyIds.map((key, idx) => {
+  const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
     return <Key
             keyId={ key }
@@ -51,20 +51,5 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
     </svg>
   );
 }
-
-const rootTranslations = Map({
-  "C": 0,
-  "D": -100,
-  "E": -200,
-  "F": -300,
-  "G": -400,
-  "A": -500,
-  "B": -600,
-  "Db": -60,
-  "Eb": -160,
-  "Gb": -360,
-  "Ab": -460,
-  "Bb": -560
-});
 
 export default SvgKeybed;

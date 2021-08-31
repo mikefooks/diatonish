@@ -1,4 +1,4 @@
-import { getScale } from "./Theory";
+import { getScale } from "./lib/Theory";
 
 const defaultOctaves = 4;
 
