@@ -4,12 +4,16 @@ import { Map } from "immutable";
 
 // config and utilities.
 import { defaultOctaves, defaultState } from "./config";
-import { modeNames, getScale } from "./lib/Theory";
+import { chromaticScale,
+         circleOfFifths,
+         modeNames,
+         getScale } from "./lib/Theory";
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
-import { RootSlider, RootDisplay, RootOnBottomToggle } from "./components/RootControls";
-import { ModeSlider, ModeDisplay } from "./components/ModeControls";
+// import { RootSlider, RootDisplay, RootOnBottomToggle } from "./components/RootControls";
+// import { ModeSlider, ModeDisplay } from "./components/ModeControls";
+import VisualSlider from "./components/VisualSlider";
 
 
 const App = (props) => {
@@ -27,12 +31,11 @@ const App = (props) => {
   const [ state, setState ] = useState(Map(defaultState));
 
   // Handler fn to reflect changes to the RootSlider input.
-  function updateRoot(evt) {
-    let noteIdx = evt.target.valueAsNumber;
-    let newScale = getScale(defaultOctaves, noteIdx, state.get("activeMode"));
+  function updateRoot(newRoot) {;
+    let newScale = getScale(defaultOctaves, newRoot, state.get("activeMode"));
 
     let newState = state.merge({
-      activeRoot: noteIdx,
+      activeRoot: newRoot,
       activeKeys: newScale
     });
 
@@ -63,6 +66,15 @@ const App = (props) => {
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
                  rootOnBottom={ state.get("rootOnBottom") } />
+      <VisualSlider name="rootSlider"
+                    values={ chromaticScale }
+                    activeValue={ state.get("activeRoot") }
+                    changeHandler={ updateRoot } />
+    </div>
+  );
+};
+
+/*
       <div className="rootControls">
         <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
         <RootSlider activeRoot={ state.get("activeRoot") }
@@ -74,8 +86,6 @@ const App = (props) => {
                     updateMode={ updateMode } />
         <ModeDisplay activeMode={ modeNames[state.get("activeMode")] } />
       </div>
-    </div>
-  );
-};
+*/
 
 export default App;

@@ -66,8 +66,14 @@ function getModeAdjustedSignature(root, modeIdx) {
   return keySignatures.find(item => item.root == adjustedRoot);
 }
 
+const chromaticScale = [
+  "C", "C\u266F/D\u266D", "D", "D\u266F/E\u266D", "E", "F",
+  "F\u266F/G\u266D", "G", "G\u266F/A\u266D", "A", "A\u266F/B\u266D", "B" 
+];
+
 const circleOfFifths = [
-  0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
+  "C", "G", "D", "A", "E", "B", "F\u266F/G\u266D", "C\u266F/D\u266D",
+  "G\u266F/A\u266D", "D\u266F/E\u266D", "A\u266F/B\u266D", "F"
 ];
 
 const modeNames = [
@@ -97,6 +103,7 @@ function getScale(octaves, root, modeIdx) {
 
 export {
   keySignatures,
+  chromaticScale,
   circleOfFifths,
   modeNames,
   getScale
