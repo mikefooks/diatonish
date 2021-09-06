@@ -26,7 +26,7 @@ const VisualSlider = (props) => {
               value={ activeValue }
               onChange={ (evt) => changeHandler(evt.target.valueAsNumber) } >
       </input>
-      <div>
+      <div class="displayPanes">
         { displayPanes }
       </div>
     </div>

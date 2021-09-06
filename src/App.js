@@ -66,14 +66,16 @@ const App = (props) => {
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
                  rootOnBottom={ state.get("rootOnBottom") } />
-      <VisualSlider name="rootSlider"
-                    values={ chromaticScale }
-                    activeValue={ state.get("activeRoot") }
-                    changeHandler={ updateRoot } />
-      <VisualSlider name="modeSlider"
-                    values={ modeNames }
-                    activeValue={ state.get("activeMode") }
-                    changeHandler={ updateMode } />
+      <div id="controlSliders">
+        <VisualSlider name="rootSlider"
+                      values={ chromaticScale }
+                      activeValue={ state.get("activeRoot") }
+                      changeHandler={ updateRoot } />
+        <VisualSlider name="modeSlider"
+                      values={ modeNames }
+                      activeValue={ state.get("activeMode") }
+                      changeHandler={ updateMode } />
+      </div>
     </div>
   );
 };

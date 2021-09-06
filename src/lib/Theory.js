@@ -23,8 +23,8 @@ const keySignatures = [
     sig: [1, 3, 4, 6, 8, 9, 11],
     names: [ "C#", "D#", "E", "F#", "G#", "A", "B" ] },
   /*
-  the following three key signatures could be interpreted differently depending
-  on the context and the musician's purposes/needs.
+  the following three key signatures could be interpreted differently 
+  depending on the context and the musician's purposes/needs.
   */
   // B major / G# minor (5 sharps)
   { root: 11,
@@ -82,7 +82,7 @@ const modeNames = [
   "Phrygian",
   "Lydian",
   "Mixolydian",
-  "Aeolian (Natural Minor)",
+  "Aeolian (Minor)",
   "Locrian"  
 ];
 

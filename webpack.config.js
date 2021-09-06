@@ -17,24 +17,16 @@ module.exports = {
 	    use: {
 	      loader: 'html-loader'
 	    }
-      }/*,
+      },
       {
-	      test: /\.scss$/,
+	      test: /\.css$/,
 	      exclude: /node_modules/,
 	      use: [
 	        'style-loader',
 	        'css-loader',
-	        'sass-loader'
 	      ]
-      }*/
+      }
     ]
-  },
-  devServer: {
-      host: "0.0.0.0",
-      port: "8080",
-      contentBase: [ "./src", "./dist" ],
-      inline: true,
-      hot: true
   },
   plugins:
   [

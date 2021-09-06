@@ -1,0 +1,42 @@
+path.inactive {
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 10px,
+    #444 10px,
+    #444 11px
+  );
+}
+
+#controlSliders {
+  width: 1400px;
+  display: flex;
+}
+
+.displayPanes {
+  display: flex;
+}
+
+.rootSlider__visualSlider {
+  flex-grow: 1;
+}
+
+.rootSlider__displayPane {
+  flex-grow: 1;
+}
+
+.rootSlider__displayPane.active {
+  background-color: rgb(216, 140, 0);
+}
+
+.modeSlider__visualSlider {
+  flex-grow: 1;
+}
+
+.modeSlider__displayPane {
+  flex-grow: 1;
+}
+
+.modeSlider__displayPane.active {
+  background-color: rgb(216, 140, 0);
+}
