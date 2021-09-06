@@ -30,9 +30,11 @@ const App = (props) => {
   // Note: defaultState getting wrapped in an Immutable Map.
   const [ state, setState ] = useState(Map(defaultState));
 
-  // Handler fn to reflect changes to the RootSlider input.
+  // Handler functions for the root and mode selectors.
   function updateRoot(newRoot) {;
-    let newScale = getScale(defaultOctaves, newRoot, state.get("activeMode"));
+    let newScale = getScale(defaultOctaves,
+                            newRoot,
+                            state.get("activeMode"));
 
     let newState = state.merge({
       activeRoot: newRoot,
@@ -42,13 +44,7 @@ const App = (props) => {
     setState(newState);
   }
 
-  function toggleRootOnBottom(evt) {
-    setState(state.set("rootOnBottom", evt.target.checked));
-  }
-
-  // Handler fn to reflect changes to the RootSlider input.
-  function updateMode(evt) {
-    let newMode = evt.target.valueAsNumber;
+  function updateMode(newMode) {
     let newScale = getScale(defaultOctaves,
                             state.get("activeRoot"),
                             newMode);
@@ -61,6 +57,10 @@ const App = (props) => {
     setState(newState);
   }
 
+  function toggleRootOnBottom(evt) {
+    setState(state.set("rootOnBottom", evt.target.checked));
+  }
+
   return (
     <div id="appWindow">
       <SvgKeybed activeRoot= { state.get("activeRoot") }
@@ -70,6 +70,10 @@ const App = (props) => {
                     values={ chromaticScale }
                     activeValue={ state.get("activeRoot") }
                     changeHandler={ updateRoot } />
+      <VisualSlider name="modeSlider"
+                    values={ modeNames }
+                    activeValue={ state.get("activeMode") }
+                    changeHandler={ updateMode } />
     </div>
   );
 };

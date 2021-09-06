@@ -19,10 +19,10 @@ const VisualSlider = (props) => {
   });
 
   return (
-    <div>
+    <div className={ `${name}__visualSlider` }>
       <input type="range"
               min="0"
-              max={ values.length }
+              max={ values.length - 1 }
               value={ activeValue }
               onChange={ (evt) => changeHandler(evt.target.valueAsNumber) } >
       </input>
