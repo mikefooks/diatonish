@@ -1,6 +1,7 @@
 import React from "react";
-import { Map } from "immutable";
 
+import { defaultOctaves } from "../config";
+import { xTranslations } from "../lib/xTranslations";
 import Key from "./Key";
 
 
@@ -10,8 +11,6 @@ const renderOrder = [
 ];
 
 const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
-  const defaultOctaves = 4;
-
   let keyIds = [];
   for (let i = 0; i < defaultOctaves; i++) {
     for (let j = 0; j < 12; j++) {
@@ -21,11 +20,10 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
 
   const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
-    return <Key
-            keyId={ key }
-            keyName={ activeKeys[key] }
-            isActive={ isActive }
-           />;
+    return <Key keyId={ key }
+                keyName={ activeKeys[key] }
+                isActive={ isActive } 
+                isRoot={ activeRoot == (key % 12) } />;
   });
 
   return (
@@ -44,7 +42,7 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
         <line stroke="#a6a6a6" strokeWidth="18px" x1="16" x2="16" y2="20"/>
       </pattern>
       <g id="keybed_group"
-         transform={ rootOnBottom ? "translate(" + rootTranslations.get(activeRoot) + ")" : "" } 
+         transform={ rootOnBottom ? "translate(" + (-1 * xTranslations[activeRoot]) + ")" : "" } 
          stroke="#000">
         { keyEls }
       </g>

@@ -16,6 +16,18 @@ function getFillColor(blackKey, isActive) {
   return blackKey ? "#000" : "#fff";
 }
 
+function isRootRing(isRoot) {
+  if (!isRoot) {
+    return null;
+  }
+  return <circle cy="80%"
+                 cx="40%"
+                 r="20px"
+                 fill="none"
+                 stroke="orange"
+                 stokeWidth="2px"/>;
+}
+
 function textElRender(keyId, isActive, blackKey) {
   if (!isActive) {
     return null;
@@ -30,7 +42,7 @@ function textElRender(keyId, isActive, blackKey) {
   );
 }
 
-const Key = ({ keyId, keyName, isActive }) => {
+const Key = ({ keyId, keyName, isActive, isRoot }) => {
   let blackKey = isBlack(keyId);
 
   return (
@@ -51,7 +63,8 @@ const Key = ({ keyId, keyName, isActive }) => {
         strokeMiterlimit={4}
         strokeDasharray="none"
         strokeOpacity={1}/>
-        { textElRender(keyName, isActive, blackKey) }
+      { isRootRing(isRoot) }
+      { textElRender(keyName, isActive, blackKey) }
     </svg>
   );
 }

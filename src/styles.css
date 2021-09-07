@@ -13,8 +13,16 @@ path.inactive {
   display: flex;
 }
 
+#controlSliders input[type="range"] {
+  width: 100%;
+}
+
 .displayPanes {
   display: flex;
+}
+
+.displayPanes h3 {
+  text-align: center;
 }
 
 .rootSlider__visualSlider {

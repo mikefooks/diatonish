@@ -11,7 +11,7 @@ import { chromaticScale,
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
-// import { RootSlider, RootDisplay, RootOnBottomToggle } from "./components/RootControls";
+import { RootOnBottomToggle } from "./components/RootControls";
 // import { ModeSlider, ModeDisplay } from "./components/ModeControls";
 import VisualSlider from "./components/VisualSlider";
 
@@ -75,6 +75,7 @@ const App = (props) => {
                       values={ modeNames }
                       activeValue={ state.get("activeMode") }
                       changeHandler={ updateMode } />
+        <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
       </div>
     </div>
   );
