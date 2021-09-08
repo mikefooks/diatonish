@@ -11,7 +11,7 @@ import { modeNames,
 import SvgKeybed from "./components/SvgKeybed";
 import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
-import { DisplayModeToggle } from "./components/DisplayControls";
+import { DisplayModeToggle, RootOnBottomToggle } from "./components/DisplayControls";
 
 
 const App = (props) => {
@@ -57,12 +57,12 @@ const App = (props) => {
     setState(newState);
   }
 
-  function toggleRootOnBottom(evt) {
-    setState(state.set("rootOnBottom", evt.target.checked));
-  }
-
   function toggleRootDisplay(val) {
     setState(state.set("rootDisplayMode", val));
+  }
+
+  function toggleRootOnBottom(checked) {
+    setState(state.set("rootOnBottom", checked));
   }
 
   return (
@@ -79,6 +79,7 @@ const App = (props) => {
                       changeHandler={ updateMode } />
         { /* display controls */ }
         <DisplayModeToggle changeHandler={ toggleRootDisplay } />
+        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />
       </div>
     </div>
   );

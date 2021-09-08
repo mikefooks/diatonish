@@ -15,11 +15,11 @@ const DisplayModeToggle = ({ changeHandler }) => {
   );
 };
 
-const RootOnBottomToggle = ({ toggleRootOnBottom }) => {
+const RootOnBottomToggle = ({ changeHandler }) => {
   return <input id="rootOnBottom"
                 name="rootOnBottom"
                 type="checkbox"
-                onChange={ toggleRootOnBottom }></input>
+                onChange={ (evt) => changeHandler(evt.target.checked) } />
 }
 
 export {
