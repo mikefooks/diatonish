@@ -25,7 +25,7 @@ function isRootRing(isRoot) {
                  r="20px"
                  fill="none"
                  stroke="orange"
-                 stokeWidth="2px"/>;
+                 strokeWidth="2px"/>;
 }
 
 function textElRender(keyId, isActive, blackKey) {

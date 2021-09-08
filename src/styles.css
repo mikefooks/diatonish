@@ -25,26 +25,26 @@ path.inactive {
   text-align: center;
 }
 
-.rootSlider__visualSlider {
+.rootControls {
   flex-grow: 1;
 }
 
-.rootSlider__displayPane {
+.rootControls .displayPane {
   flex-grow: 1;
 }
 
-.rootSlider__displayPane.active {
+.rootControls .displayPane.active {
   background-color: rgb(216, 140, 0);
 }
 
-.modeSlider__visualSlider {
+.modeControls {
   flex-grow: 1;
 }
 
-.modeSlider__displayPane {
+.modeControls .displayPane {
   flex-grow: 1;
 }
 
-.modeSlider__displayPane.active {
+.modeControls .displayPane.active {
   background-color: rgb(216, 140, 0);
 }

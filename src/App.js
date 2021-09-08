@@ -4,22 +4,22 @@ import { Map } from "immutable";
 
 // config and utilities.
 import { defaultOctaves, defaultState } from "./config";
-import { chromaticScale,
-         circleOfFifths,
-         modeNames,
+import { modeNames,
          getScale } from "./lib/Theory";
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
-import { RootOnBottomToggle } from "./components/RootControls";
-// import { ModeSlider, ModeDisplay } from "./components/ModeControls";
-import VisualSlider from "./components/VisualSlider";
+import RootControls from "./components/RootControls";
+import ModeControls from "./components/ModeControls";
+import { DisplayModeToggle } from "./components/DisplayControls";
 
 
 const App = (props) => {
   /*
   Setting up state store and defining default values.
   State structure: {
+    rootSliderMode: int (0=chromatic, 1=circleOfFifths
+    )
     activeRoot: int,
     activeMode: int,
     rootOnBottom: boolean,
@@ -61,21 +61,24 @@ const App = (props) => {
     setState(state.set("rootOnBottom", evt.target.checked));
   }
 
+  function toggleRootDisplay(val) {
+    setState(state.set("rootDisplayMode", val));
+  }
+
   return (
     <div id="appWindow">
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div id="controlSliders">
-        <VisualSlider name="rootSlider"
-                      values={ chromaticScale }
+        <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
                       activeValue={ state.get("activeRoot") }
                       changeHandler={ updateRoot } />
-        <VisualSlider name="modeSlider"
-                      values={ modeNames }
+        <ModeControls values={ modeNames }
                       activeValue={ state.get("activeMode") }
                       changeHandler={ updateMode } />
-        <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
+        { /* display controls */ }
+        <DisplayModeToggle changeHandler={ toggleRootDisplay } />
       </div>
     </div>
   );
