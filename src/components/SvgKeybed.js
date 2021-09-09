@@ -20,8 +20,12 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
 
   const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
+    let keyName = isActive ? activeKeys[key].name : "";
+    let scaleDegree = isActive ? activeKeys[key].degree : "";
+
     return <Key keyId={ key }
-                keyName={ activeKeys[key] }
+                keyName={ keyName }
+                scaleDegree={ scaleDegree }
                 isActive={ isActive } 
                 isRoot={ activeRoot == (key % 12) } />;
   });

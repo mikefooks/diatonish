@@ -11,21 +11,11 @@ import { modeNames,
 import SvgKeybed from "./components/SvgKeybed";
 import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
-import { DisplayModeToggle, RootOnBottomToggle } from "./components/DisplayControls";
+import { DisplayModeToggle,
+         RootOnBottomToggle } from "./components/DisplayControls";
 
 
 const App = (props) => {
-  /*
-  Setting up state store and defining default values.
-  State structure: {
-    rootSliderMode: int (0=chromatic, 1=circleOfFifths
-    )
-    activeRoot: int,
-    activeMode: int,
-    rootOnBottom: boolean,
-    activeKeys: Object ({ keyId (int) : keyName (String) }),
-  }
-  */
 
   // Note: defaultState getting wrapped in an Immutable Map.
   const [ state, setState ] = useState(Map(defaultState));
@@ -84,19 +74,5 @@ const App = (props) => {
     </div>
   );
 };
-
-/*
-      <div className="rootControls">
-        <RootOnBottomToggle toggleRootOnBottom={ toggleRootOnBottom } />
-        <RootSlider activeRoot={ state.get("activeRoot") }
-                    updateRoot={ updateRoot } />
-        <RootDisplay activeRoot={ state.get("activeRoot") } />
-      </div>
-      <div className="modeControls">
-        <ModeSlider activeMode={ state.get("activeMode") }
-                    updateMode={ updateMode } />
-        <ModeDisplay activeMode={ modeNames[state.get("activeMode")] } />
-      </div>
-*/
 
 export default App;

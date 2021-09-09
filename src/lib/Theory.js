@@ -61,11 +61,6 @@ const modeDisplacements = [
   0, 10, 8, 7, 5, 3, 1 
 ];
 
-function getModeAdjustedSignature(root, modeIdx) {
-  let adjustedRoot = (root + modeDisplacements[modeIdx]) % 12;
-  return keySignatures.find(item => item.root == adjustedRoot);
-}
-
 const chromaticScale = [
   "C", "C\u266F/D\u266D", "D", "D\u266F/E\u266D", "E", "F",
   "F\u266F/G\u266D", "G", "G\u266F/A\u266D", "A", "A\u266F/B\u266D", "B" 
@@ -86,15 +81,42 @@ const modeNames = [
   "Locrian"  
 ];
 
+// find the correct keysignature, given a root note and the mode.
+function getModeAdjustedSignature(root, modeIdx) {
+  let adjustedRoot = (root + modeDisplacements[modeIdx]) % 12;
+  return keySignatures.find(item => item.root == adjustedRoot);
+}
+
+function getScaleDegrees(root, keySig) {
+  let degreeStart = keySig.sig.indexOf(root);
+  let front = [];
+  let back = [];
+
+  for (let i = 0; i < 7; i++) {
+    if (i >= (7-degreeStart)) {
+      front.push(i+1);
+    } else {
+      back.push(i+1);
+    }
+  }
+  return front.concat(back);
+}
+
 // Get the particular keys in a mode/scale.
 function getScale(octaves, root, modeIdx) {
-  let scale = {};
   let keySig = getModeAdjustedSignature(root, modeIdx);
+  let degrees = getScaleDegrees(root, keySig);
+  let scale = {};
+
+  // building up the scale degrees array
 
   for (let i = 0; i < octaves; i++) {
     for (let j = 0; j < 7; j++) {
       let keyIndex = keySig.sig[j] + (i*12);
-      scale[keyIndex] = keySig.names[j];
+      scale[keyIndex] = {
+        degree: degrees[j],
+        name: keySig.names[j]
+      }
     }
   }
 

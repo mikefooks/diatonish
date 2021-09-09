@@ -28,7 +28,7 @@ function isRootRing(isRoot) {
                  strokeWidth="2px"/>;
 }
 
-function textElRender(keyId, isActive, blackKey) {
+function keyNameEl(keyName, isActive, blackKey) {
   if (!isActive) {
     return null;
   }
@@ -37,12 +37,26 @@ function textElRender(keyId, isActive, blackKey) {
       x="40%"
       y="80%"
       fill={ blackKey ? "#fff" : "#000" }>
-        { keyId.split("_")[0] }
+        { keyName }
     </text>
   );
 }
 
-const Key = ({ keyId, keyName, isActive, isRoot }) => {
+function scaleDegreeEl(scaleDegree, isActive, blackKey) {
+  if (!isActive) {
+    return null;
+  }
+  return (
+    <text
+      x="40%"
+      y="90%"
+      fill={ blackKey ? "#fff" : "#000" }>
+        { scaleDegree }
+    </text>
+  );
+}
+
+const Key = ({ keyId, keyName, scaleDegree, isActive, isRoot }) => {
   let blackKey = isBlack(keyId);
 
   return (
@@ -64,7 +78,8 @@ const Key = ({ keyId, keyName, isActive, isRoot }) => {
         strokeDasharray="none"
         strokeOpacity={1}/>
       { isRootRing(isRoot) }
-      { textElRender(keyName, isActive, blackKey) }
+      { keyNameEl(keyName, isActive, blackKey) }
+      { scaleDegreeEl(scaleDegree, isActive, blackKey) }
     </svg>
   );
 }
