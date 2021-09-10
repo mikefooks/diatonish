@@ -34,7 +34,6 @@ const RootControls = (props) => {
     );
   });
 
-  // Remember to change className
   return (
     <div className={ "rootControls" }>
       <input type="range"

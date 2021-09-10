@@ -81,12 +81,17 @@ const modeNames = [
   "Locrian"  
 ];
 
-// find the correct keysignature, given a root note and the mode.
+const chordNumerals = [
+  "i", "ii", "iii", "iv", "v", "vi", "vii"
+];
+
+// find the correct key signature, given a root note and the mode.
 function getModeAdjustedSignature(root, modeIdx) {
   let adjustedRoot = (root + modeDisplacements[modeIdx]) % 12;
   return keySignatures.find(item => item.root == adjustedRoot);
 }
 
+// get numerical scale degrees for a given root.
 function getScaleDegrees(root, keySig) {
   let degreeStart = keySig.sig.indexOf(root);
   let front = [];
@@ -108,8 +113,6 @@ function getScale(octaves, root, modeIdx) {
   let degrees = getScaleDegrees(root, keySig);
   let scale = {};
 
-  // building up the scale degrees array
-
   for (let i = 0; i < octaves; i++) {
     for (let j = 0; j < 7; j++) {
       let keyIndex = keySig.sig[j] + (i*12);
@@ -128,5 +131,6 @@ export {
   chromaticScale,
   circleOfFifths,
   modeNames,
+  chordNumerals,
   getScale
 };

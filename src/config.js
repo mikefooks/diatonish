@@ -9,6 +9,7 @@ const defaultState = {
   // scale & chord state
   activeRoot: 0,
   activeMode: 0,
+  activeChord: 0,
   activeKeys: getScale(defaultOctaves, 0, 0)
 };
 

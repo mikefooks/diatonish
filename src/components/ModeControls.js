@@ -1,11 +1,13 @@
 import React from "react";
 
 
-const ModeControls = (props) => {
-  let { values, activeValue, changeHandler } = props;
+import { modeNames } from "../lib/Theory";
 
-  let displayPanes = values.map((val, idx) => {
-    let active = idx == activeValue ? "active" : "";
+const ModeControls = (props) => {
+  let { activeMode, changeHandler } = props;
+
+  let displayPanes = modeNames.map((val, idx) => {
+    let active = idx == activeMode ? "active" : "";
     let classes = `displayPane ${active}`.trimEnd();
 
     return (
@@ -22,8 +24,8 @@ const ModeControls = (props) => {
     <div className={ "modeControls" }>
       <input type="range"
              min="0"
-             max={ values.length - 1 }
-             value={ activeValue }
+             max={ modeNames.length - 1 }
+             value={ activeMode }
              onChange={ (evt) => changeHandler(evt.target.valueAsNumber) } >
       </input>
       <div className="displayPanes">
@@ -32,11 +34,5 @@ const ModeControls = (props) => {
     </div>
   );
 };
-
-const ModeDisplay = (props) => {
-  return <div className="modeDisplay">
-    <h2>{ props.activeMode }</h2>
-  </div>;
-}
 
 export default ModeControls;

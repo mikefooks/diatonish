@@ -48,3 +48,15 @@ path.inactive {
 .modeControls .displayPane.active {
   background-color: rgb(216, 140, 0);
 }
+
+.chordControls {
+  flex-grow: 1;
+}
+
+.chordControls .displayPane {
+  flex-grow: 1;
+}
+
+.chordControls .displayPane.active {
+  background-color: rgb(216, 140, 0);
+}

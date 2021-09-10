@@ -4,13 +4,13 @@ import { Map } from "immutable";
 
 // config and utilities.
 import { defaultOctaves, defaultState } from "./config";
-import { modeNames,
-         getScale } from "./lib/Theory";
+import { getScale } from "./lib/Theory";
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
 import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
+import ChordControls from "./components/ChordControls";
 import { DisplayModeToggle,
          RootOnBottomToggle } from "./components/DisplayControls";
 
@@ -47,6 +47,17 @@ const App = (props) => {
     setState(newState);
   }
 
+  function updateChord(newChord) {
+    let newState = state.merge({
+      activeChord: newChord
+    });
+
+    setState(newState);
+  }
+
+  // Handlers for display option controls.
+
+  // "root display mode" refers to chromatic/circle of fifths
   function toggleRootDisplay(val) {
     setState(state.set("rootDisplayMode", val));
   }
@@ -61,12 +72,19 @@ const App = (props) => {
                  activeKeys={ state.get("activeKeys") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div id="controlSliders">
+        <div>
         <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
                       activeValue={ state.get("activeRoot") }
                       changeHandler={ updateRoot } />
-        <ModeControls values={ modeNames }
-                      activeValue={ state.get("activeMode") }
+        </div>
+        <div>
+        <ModeControls activeMode={ state.get("activeMode") }
                       changeHandler={ updateMode } />
+        </div>
+        <div>
+        <ChordControls activeChord={ state.get("activeChord") }
+                       changeHandler={ updateChord } />
+        </div>
         { /* display controls */ }
         <DisplayModeToggle changeHandler={ toggleRootDisplay } />
         <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />
