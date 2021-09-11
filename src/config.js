@@ -9,8 +9,9 @@ const defaultState = {
   // scale & chord state
   activeRoot: 0,
   activeMode: 0,
-  activeChord: 0,
-  activeKeys: getScale(defaultOctaves, 0, 0)
+  activeKeys: getScale(defaultOctaves, 0, 0),
+  chordRoot: 0,
+  chordScaleDegrees: [1, 3, 5]
 };
 
 export {

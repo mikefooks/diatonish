@@ -4,7 +4,7 @@ import { Map } from "immutable";
 
 // config and utilities.
 import { defaultOctaves, defaultState } from "./config";
-import { getScale } from "./lib/Theory";
+import { getChordDegrees, getScale } from "./lib/Theory";
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
@@ -47,9 +47,10 @@ const App = (props) => {
     setState(newState);
   }
 
-  function updateChord(newChord) {
+  function updateChord(newChordRoot) {
     let newState = state.merge({
-      activeChord: newChord
+      chordRoot: newChordRoot,
+      chordScaleDegrees: getChordDegrees(newChordRoot)
     });
 
     setState(newState);
@@ -70,6 +71,7 @@ const App = (props) => {
     <div id="appWindow">
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
+                 chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div id="controlSliders">
         <div>
@@ -82,7 +84,7 @@ const App = (props) => {
                       changeHandler={ updateMode } />
         </div>
         <div>
-        <ChordControls activeChord={ state.get("activeChord") }
+        <ChordControls chordRoot={ state.get("chordRoot") }
                        changeHandler={ updateChord } />
         </div>
         { /* display controls */ }

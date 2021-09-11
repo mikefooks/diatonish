@@ -126,11 +126,19 @@ function getScale(octaves, root, modeIdx) {
   return scale;
 }
 
+const majorChordQualities = [0, 1, 1, 0, 0, 1, 2];
+
+// type refers to triad or seventh.
+function getChordDegrees(root) {
+  return [ root, root + 2, root + 4].map(v => (v % 7) + 1);
+}
+
 export {
   keySignatures,
   chromaticScale,
   circleOfFifths,
   modeNames,
   chordNumerals,
-  getScale
+  getScale,
+  getChordDegrees
 };

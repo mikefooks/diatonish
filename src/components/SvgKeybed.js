@@ -10,8 +10,10 @@ const renderOrder = [
   1, 3, 6, 8, 10 // black keys
 ];
 
-const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
+const SvgKeybed = (props) => {
+  let { activeRoot, activeKeys, chordScaleDegrees, rootOnBottom } = props;
   let keyIds = [];
+
   for (let i = 0; i < defaultOctaves; i++) {
     for (let j = 0; j < 12; j++) {
       keyIds.push(renderOrder[j] + (12 * i));
@@ -20,12 +22,14 @@ const SvgKeybed = ({ activeRoot, activeKeys, rootOnBottom }) => {
 
   const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
+    let isChordtone = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree) >= 0;
     let keyName = isActive ? activeKeys[key].name : "";
     let scaleDegree = isActive ? activeKeys[key].degree : "";
 
     return <Key keyId={ key }
                 keyName={ keyName }
                 scaleDegree={ scaleDegree }
+                isChordTone={ isChordtone }
                 isActive={ isActive } 
                 isRoot={ activeRoot == (key % 12) } />;
   });

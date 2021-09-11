@@ -9,10 +9,15 @@ function isBlack(keyId) {
   return blackKeys.includes(keyId % 12);
 }
 
-function getFillColor(blackKey, isActive) {
+function getFillColor(blackKey, isActive, isChordTone) {
   if (!isActive) {
     return "url(#inactive_fill)";
   }
+
+  if (isChordTone) {
+    return "#f0a";
+  }
+
   return blackKey ? "#000" : "#fff";
 }
 
@@ -56,7 +61,8 @@ function scaleDegreeEl(scaleDegree, isActive, blackKey) {
   );
 }
 
-const Key = ({ keyId, keyName, scaleDegree, isActive, isRoot }) => {
+const Key = (props) => {
+  let { keyId, keyName, scaleDegree, isActive, isRoot, isChordTone } = props;
   let blackKey = isBlack(keyId);
 
   return (
@@ -71,7 +77,7 @@ const Key = ({ keyId, keyName, scaleDegree, isActive, isRoot }) => {
         height="100%"
         x={ 0 }
         y={ 0 }
-        fill={ getFillColor(blackKey, isActive) }
+        fill={ getFillColor(blackKey, isActive, isChordTone) }
         fillOpacity={1}
         strokeWidth={ isActive ? 1 : 0 }
         strokeMiterlimit={4}
