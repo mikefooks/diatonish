@@ -1,0 +1,61 @@
+path.inactive {
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 10px,
+    #444 10px,
+    #444 11px
+  );
+}
+
+#controlSliders {
+  width: 1400px;
+  display: flex;
+  input[type="range"] {
+    width: 100%;
+  }  
+}
+
+.displayPanes {
+  display: flex;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+.rootControls {
+  flex-grow: 1;
+
+  .displayPane {
+    flex-grow: 1;
+  }
+
+  .displayPane.active {
+    background-color: rgb(216, 140, 0);
+  }
+}
+
+.modeControls {
+  flex-grow: 1;
+
+  .displayPane {
+    flex-grow: 1;
+  }
+
+  .displayPane.active {
+    background-color: rgb(216, 140, 0);
+  }
+}
+
+.chordControls {
+  flex-grow: 1;
+
+  .displayPane {
+    flex-grow: 1;
+  }
+
+  .displayPane.active {
+    background-color: rgb(216, 140, 0);
+  }
+}
