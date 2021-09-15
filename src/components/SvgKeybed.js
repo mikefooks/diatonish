@@ -11,7 +11,14 @@ const renderOrder = [
 ];
 
 const SvgKeybed = (props) => {
-  let { activeRoot, activeKeys, chordScaleDegrees, rootOnBottom } = props;
+  let { activeRoot,
+        activeKeys,
+        scaleDegreeMode,
+        chordScaleDegrees,
+        rootOnBottom } = props;
+
+  console.log(scaleDegreeMode);
+
   let keyIds = [];
 
   for (let i = 0; i < defaultOctaves; i++) {
@@ -22,14 +29,25 @@ const SvgKeybed = (props) => {
 
   const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
-    let isChordtone = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree) >= 0;
+    let isChordTone = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree) >= 0;
+    let chordToneIdx = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree);
     let keyName = isActive ? activeKeys[key].name : "";
-    let scaleDegree = isActive ? activeKeys[key].degree : "";
+    let degree;
+
+    if (isActive) {
+      if (scaleDegreeMode == 0) {
+        degree = "";
+      } else if (scaleDegreeMode == 1) {
+        degree = activeKeys[key].degree;
+      } else if (scaleDegreeMode == 2) {
+        degree = isChordTone ? (chordToneIdx * 2) + 1 : "";
+      }  
+    }
 
     return <Key keyId={ key }
                 keyName={ keyName }
-                scaleDegree={ scaleDegree }
-                isChordTone={ isChordtone }
+                degree={ degree }
+                isChordTone={ isChordTone }
                 isActive={ isActive } 
                 isRoot={ activeRoot == (key % 12) } />;
   });

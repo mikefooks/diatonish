@@ -31,7 +31,7 @@ const ModeControls = (props) => {
       <div className="displayPanes">
         { displayPanes }
       </div>
-      <div class="activeModeName">
+      <div className="activeModeName">
         { modeNames[activeMode] }
       </div>
     </div>

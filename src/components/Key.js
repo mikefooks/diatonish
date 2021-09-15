@@ -47,7 +47,7 @@ function keyNameEl(keyName, isActive, blackKey) {
   );
 }
 
-function scaleDegreeEl(scaleDegree, isActive, blackKey) {
+function scaleDegreeEl(degree, isActive, blackKey) {
   if (!isActive) {
     return null;
   }
@@ -56,13 +56,13 @@ function scaleDegreeEl(scaleDegree, isActive, blackKey) {
       x="40%"
       y="90%"
       fill={ blackKey ? "#fff" : "#000" }>
-        { scaleDegree }
+        { degree }
     </text>
   );
 }
 
 const Key = (props) => {
-  let { keyId, keyName, scaleDegree, isActive, isRoot, isChordTone } = props;
+  let { keyId, keyName, degree, isActive, isRoot, isChordTone } = props;
   let blackKey = isBlack(keyId);
 
   return (
@@ -85,7 +85,7 @@ const Key = (props) => {
         strokeOpacity={1}/>
       { isRootRing(isRoot) }
       { keyNameEl(keyName, isActive, blackKey) }
-      { scaleDegreeEl(scaleDegree, isActive, blackKey) }
+      { scaleDegreeEl(degree, isActive, blackKey) }
     </svg>
   );
 }

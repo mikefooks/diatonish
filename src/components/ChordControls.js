@@ -4,10 +4,10 @@ import { chordNumerals } from "../lib/Theory";
 
 
 const ChordControls = (props) => {
-  let { chordRoot, changeHandler } = props;
+  let { activeChord, changeHandler } = props;
 
   let displayPanes = chordNumerals.map((val, idx) => {
-    let active = idx == chordRoot ? "active" : "";
+    let active = idx == activeChord ? "active" : "";
     let classes = `displayPane ${active}`.trimEnd();
 
     return (
@@ -25,7 +25,7 @@ const ChordControls = (props) => {
       <input type="range"
               min="0"
               max={ chordNumerals.length - 1 }
-              value={ chordRoot }
+              value={ activeChord }
               onChange={ (evt) => changeHandler(evt.target.valueAsNumber) }/>
       <div className="displayPanes">
         { displayPanes }

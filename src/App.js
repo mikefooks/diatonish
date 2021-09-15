@@ -12,7 +12,8 @@ import { RootControls,
          DisplayModeToggle } from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
 import ChordControls from "./components/ChordControls";
-import { RootOnBottomToggle } from "./components/DisplayControls";
+import { ScaleDegreeSelector,
+         RootOnBottomToggle } from "./components/DisplayControls";
 
 
 const App = (props) => {
@@ -34,6 +35,11 @@ const App = (props) => {
     setState(newState);
   }
 
+  // "root display mode" refers to chromatic/circle of fifths
+  function toggleRootDisplay(val) {
+    setState(state.set("rootDisplayMode", val));
+  }
+
   function updateMode(newMode) {
     let newScale = getScale(defaultOctaves,
                             state.get("activeRoot"),
@@ -47,10 +53,10 @@ const App = (props) => {
     setState(newState);
   }
 
-  function updateChord(newChordRoot) {
+  function updateChord(newActiveChord) {
     let newState = state.merge({
-      chordRoot: newChordRoot,
-      chordScaleDegrees: getChordDegrees(newChordRoot)
+      activeChord: newActiveChord,
+      chordScaleDegrees: getChordDegrees(newActiveChord)
     });
 
     setState(newState);
@@ -58,9 +64,12 @@ const App = (props) => {
 
   // Handlers for display option controls.
 
-  // "root display mode" refers to chromatic/circle of fifths
-  function toggleRootDisplay(val) {
-    setState(state.set("rootDisplayMode", val));
+  function selectDegreeMode(value) {
+    let newState = state.merge({
+      scaleDegreeMode: value
+    });
+
+    setState(newState);
   }
 
   function toggleRootOnBottom(checked) {
@@ -71,6 +80,8 @@ const App = (props) => {
     <div id="appWindow">
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
+                 scaleDegreeMode={ state.get("scaleDegreeMode") }
+                 activeChord={ state.get("activeChord") }
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div id="controlSliders">
@@ -85,11 +96,12 @@ const App = (props) => {
                       changeHandler={ updateMode } />
         </div>
         <div>
-        <ChordControls chordRoot={ state.get("chordRoot") }
+        <ChordControls activeChord={ state.get("activeChord") }
                        changeHandler={ updateChord } />
         </div>
         { /* display controls */ }
-        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />
+        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
+        <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
       </div>
     </div>
   );
