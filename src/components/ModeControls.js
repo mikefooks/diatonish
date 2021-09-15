@@ -12,9 +12,9 @@ const ModeControls = (props) => {
 
     return (
       <div className={ classes }
-           onClick={ () => changeHandler(idx) }>
+           onMouseDown={ () => changeHandler(idx) }>
         <h3>
-          { val }
+          { idx + 1 }
         </h3>
       </div>
     );
@@ -30,6 +30,9 @@ const ModeControls = (props) => {
       </input>
       <div className="displayPanes">
         { displayPanes }
+      </div>
+      <div class="activeModeName">
+        { modeNames[activeMode] }
       </div>
     </div>
   );

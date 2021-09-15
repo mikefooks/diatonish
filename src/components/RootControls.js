@@ -14,6 +14,21 @@ const circleOfFifths = [
   0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
 ];
 
+const DisplayModeToggle = ({ changeHandler }) => {
+  return (
+    <fieldset onChange={ (evt) => changeHandler(evt.target.value) }>
+      <label>Chromatic</label>
+      <input type="radio"
+             name="displayMode"
+             value="0"
+             defaultChecked />
+      <label>Circle of Fifths</label>
+      <input type="radio"
+             name="displayMode"
+             value="1" />
+    </fieldset>
+  );
+};
 
 const RootControls = (props) => {
   const { rootDisplayMode, activeValue, changeHandler } = props;
@@ -27,7 +42,7 @@ const RootControls = (props) => {
 
     return (
       <div className={ classes }
-           onClick={ () => changeHandler(val) }>
+           onMouseDown={ () => changeHandler(val) }>
         <h3>
           { rootNames[val] }
         </h3>
@@ -55,4 +70,7 @@ const RootControls = (props) => {
   );
 };
 
-export default RootControls;
+export {
+  DisplayModeToggle,
+  RootControls
+};

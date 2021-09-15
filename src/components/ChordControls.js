@@ -12,7 +12,7 @@ const ChordControls = (props) => {
 
     return (
       <div className={ classes }
-           onClick={ () => {  changeHandler(idx) } }>
+           onMouseDown={ () => {  changeHandler(idx) } }>
         <h3>
           { val }
         </h3>
