@@ -86,6 +86,9 @@ const App = (props) => {
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div className="controls">
         <div className="rootControl">
+          <div className="rootControl--label">
+            <h3>Root</h3>
+          </div>
           <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
                         activeValue={ state.get("activeRoot") }
                         changeHandler={ updateRoot } />
@@ -93,13 +96,14 @@ const App = (props) => {
             <DisplayModeToggle changeHandler={ toggleRootDisplay } />
           </div>
         </div>
-        <div className="modeControl">
-          <ModeControls activeMode={ state.get("activeMode") }
-                        changeHandler={ updateMode } />
-        </div>
+        <ModeControls activeMode={ state.get("activeMode") }
+                      changeHandler={ updateMode } />
         <div className="chordControl">
+          <div className="chordControl--label">
+            <h3>Chord</h3>
+          </div>
           <ChordControls activeChord={ state.get("activeChord") }
-                        changeHandler={ updateChord } />
+                         changeHandler={ updateChord } />
         </div>
         { /* display controls */ }
         <div class="displayOptions">

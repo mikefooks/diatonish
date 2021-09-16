@@ -17,15 +17,19 @@ const circleOfFifths = [
 const DisplayModeToggle = ({ changeHandler }) => {
   return (
     <div onChange={ (evt) => changeHandler(evt.target.value) }>
-      <label>Chromatic</label>
-      <input type="radio"
-            name="displayMode"
-            value="0"
-            defaultChecked />
-      <label>Circle of Fifths</label>
-      <input type="radio"
-            name="displayMode"
-            value="1" />
+      <div>
+        <label>Chromatic</label>
+        <input type="radio"
+               name="displayMode"
+               value="0"
+               defaultChecked />
+      </div>
+      <div>
+        <label>Circle of Fifths</label>
+        <input type="radio"
+               name="displayMode"
+               value="1" />
+      </div>
     </div>
   );
 };

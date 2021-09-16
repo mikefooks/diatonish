@@ -29,18 +29,23 @@ const ModeControls = (props) => {
   });
 
   return (
-    <div className="modeControl--input">
-      <input type="range"
-             min="0"
-             max={ modeNames.length - 1 }
-             value={ activeMode }
-             onChange={ (evt) => changeHandler(evt.target.valueAsNumber) } >
-      </input>
-      <div className="displayPanes">
-        { displayPanes }
+    <div className="modeControl">
+      <div className="modeControl--label">
+        <h3>Mode</h3>
       </div>
-      <div className="activeModeDisplay">
-        { modeNames[activeMode] }
+      <div className="modeControl--input">
+        <input type="range"
+              min="0"
+              max={ modeNames.length - 1 }
+              value={ activeMode }
+              onChange={ (evt) => changeHandler(evt.target.valueAsNumber) } >
+        </input>
+        <div className="displayPanes">
+          { displayPanes }
+        </div>
+      </div>
+      <div className="modeControl--options">
+          <h3>{ modeNames[activeMode] }</h3>
       </div>
     </div>
   );

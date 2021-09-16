@@ -18,22 +18,15 @@ path.inactive {
 }
 
 .displayPane {
-  flex-grow: 1;
+  flex-grow: 4;
   cursor: pointer;
-  background: linear-gradient(0deg, 
-    rgba(34,34,34,1) 0%,
-    rgba(221,221,221,1) 20%,
-    rgba(221,221,221,1) 80%,
-    rgba(34,34,34,1) 100%
-  );
+  background: rgb(255, 255, 255)
 }
 
 .displayPane.active {
   background: linear-gradient(0deg, 
-    rgba(34,34,34,1) 0%,
-    rgb(126, 126, 126) 10%,
-    rgb(126, 126, 126) 10%,
-    rgba(34,34,34,1) 100%
+    rgb(170, 0, 0) 0%,
+    rgb(248, 65, 65) 100%,
   );
 }
 
@@ -46,13 +39,51 @@ path.inactive {
 }
 
 .rootControl {
+  display: flex;
   flex-grow: 1;
+}
+
+.rootControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.rootControl--input {
+  width: 70%;
+}
+
+.rootControl--options {
+  padding: .5em 1em;
 }
 
 .modeControl {
+  display: flex;
   flex-grow: 1;
 }
 
+.modeControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.modeControl--input {
+  width: 70%;
+}
+
+.modeControl--options {
+  padding: .5em 1em;
+}
+
 .chordControl {
+  display: flex;
   flex-grow: 1;
+}
+
+.chordControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.chordControl--input {
+  width: 70%;
 }
