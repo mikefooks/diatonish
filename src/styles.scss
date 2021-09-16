@@ -8,14 +8,6 @@ path.inactive {
   );
 }
 
-#controlSliders {
-  width: 1400px;
-  /* display: flex; */
-  input[type="range"] {
-    width: 100%;
-  }  
-}
-
 .displayPanes {
   display: flex;
   background: rgb(34,34,34);
@@ -25,77 +17,42 @@ path.inactive {
   }
 }
 
+.displayPane {
+  flex-grow: 1;
+  cursor: pointer;
+  background: linear-gradient(0deg, 
+    rgba(34,34,34,1) 0%,
+    rgba(221,221,221,1) 20%,
+    rgba(221,221,221,1) 80%,
+    rgba(34,34,34,1) 100%
+  );
+}
+
+.displayPane.active {
+  background: linear-gradient(0deg, 
+    rgba(34,34,34,1) 0%,
+    rgb(126, 126, 126) 10%,
+    rgb(126, 126, 126) 10%,
+    rgba(34,34,34,1) 100%
+  );
+}
+
+#controlSliders {
+  width: 1400px;
+  /* display: flex; */
+  input[type="range"] {
+    width: 100%;
+  }  
+}
+
 .rootControls {
   flex-grow: 1;
-
-  .displayPane {
-    flex-grow: 1;
-    cursor: pointer;
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgba(221,221,221,1) 20%,
-      rgba(221,221,221,1) 80%,
-      rgba(34,34,34,1) 100%
-    );
-  }
-
-  .displayPane.active {
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgb(126, 126, 126) 10%,
-      rgb(126, 126, 126) 10%,
-      rgba(34,34,34,1) 100%
-    );
-    /* background-color: rgb(216, 140, 0); */
-  }
 }
 
 .modeControls {
   flex-grow: 1;
-
-  .displayPane {
-    flex-grow: 1;
-    cursor: pointer;
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgba(221,221,221,1) 20%,
-      rgba(221,221,221,1) 80%,
-      rgba(34,34,34,1) 100%
-    );
-  }
-
-  .displayPane.active {
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgb(126, 126, 126) 10%,
-      rgb(126, 126, 126) 10%,
-      rgba(34,34,34,1) 100%
-    );
-    /* background-color: rgb(216, 140, 0); */
-  }
 }
 
 .chordControls {
   flex-grow: 1;
-
-  .displayPane {
-    flex-grow: 1;
-    cursor: pointer;
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgba(221,221,221,1) 20%,
-      rgba(221,221,221,1) 80%,
-      rgba(34,34,34,1) 100%
-    );
-  }
-
-  .displayPane.active {
-    background: linear-gradient(0deg, 
-      rgba(34,34,34,1) 0%,
-      rgb(126, 126, 126) 10%,
-      rgb(126, 126, 126) 10%,
-      rgba(34,34,34,1) 100%
-    );
-    /* background-color: rgb(216, 140, 0); */
-  }
 }

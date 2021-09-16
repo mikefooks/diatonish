@@ -1,12 +1,20 @@
 import React from "react";
 
 
-import { modeNames } from "../lib/Theory";
+const modeNames = [
+  "Ionian (Major)",
+  "Dorian",
+  "Phrygian",
+  "Lydian",
+  "Mixolydian",
+  "Aeolian (Minor)",
+  "Locrian"  
+];
 
 const ModeControls = (props) => {
   let { activeMode, changeHandler } = props;
 
-  let displayPanes = modeNames.map((val, idx) => {
+  let displayPanes = modeNames.map((_, idx) => {
     let active = idx == activeMode ? "active" : "";
     let classes = `displayPane ${active}`.trimEnd();
 
@@ -21,7 +29,7 @@ const ModeControls = (props) => {
   });
 
   return (
-    <div className={ "modeControls" }>
+    <div className="modeControls">
       <input type="range"
              min="0"
              max={ modeNames.length - 1 }

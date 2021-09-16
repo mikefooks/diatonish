@@ -1,6 +1,3 @@
-import { List } from "immutable";
-                                                        
-
 const keySignatures = [
   // C Major / A Minor (no sharps/flats)
   { root: 0, 
@@ -71,20 +68,6 @@ const circleOfFifths = [
   "G\u266F/A\u266D", "D\u266F/E\u266D", "A\u266F/B\u266D", "F"
 ];
 
-const modeNames = [
-  "Ionian (Major)",
-  "Dorian",
-  "Phrygian",
-  "Lydian",
-  "Mixolydian",
-  "Aeolian (Minor)",
-  "Locrian"  
-];
-
-const chordNumerals = [
-  "i", "ii", "iii", "iv", "v", "vi", "vii"
-];
-
 // find the correct key signature, given a root note and the mode.
 function getModeAdjustedSignature(root, modeIdx) {
   let adjustedRoot = (root + modeDisplacements[modeIdx]) % 12;
@@ -126,8 +109,6 @@ function getScale(octaves, root, modeIdx) {
   return scale;
 }
 
-const majorChordQualities = [0, 1, 1, 0, 0, 1, 2];
-
 // type refers to triad or seventh.
 function getChordDegrees(root) {
   return [ root, root + 2, root + 4].map(v => (v % 7) + 1);
@@ -137,8 +118,6 @@ export {
   keySignatures,
   chromaticScale,
   circleOfFifths,
-  modeNames,
-  chordNumerals,
   getScale,
   getChordDegrees
 };

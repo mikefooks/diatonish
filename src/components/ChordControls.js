@@ -1,7 +1,11 @@
 import React from "react";
 
-import { chordNumerals } from "../lib/Theory";
 
+const chordNumerals = [
+  "i", "ii", "iii", "iv", "v", "vi", "vii"
+];
+
+const majorChordQualities = [0, 1, 1, 0, 0, 1, 2];
 
 const ChordControls = (props) => {
   let { activeChord, changeHandler } = props;
@@ -21,7 +25,7 @@ const ChordControls = (props) => {
   });
 
   return (
-    <div className={ "chordControls" }>
+    <div className="chordControls">
       <input type="range"
               min="0"
               max={ chordNumerals.length - 1 }

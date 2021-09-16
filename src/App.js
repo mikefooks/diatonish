@@ -100,8 +100,10 @@ const App = (props) => {
                        changeHandler={ updateChord } />
         </div>
         { /* display controls */ }
-        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
-        <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
+        <div class="displayOptions">
+          <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
+          <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
+        </div>
       </div>
     </div>
   );

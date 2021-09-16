@@ -3,7 +3,7 @@ import React from "react";
 
 const RootOnBottomToggle = ({ changeHandler }) => {
   return (
-    <div className="rootOnBottom">
+    <div className="rootOnBottomCheck">
       <input name="rootOnBottom"
              type="checkbox"
              onChange={ (evt) => changeHandler(evt.target.checked) } />
@@ -14,7 +14,7 @@ const RootOnBottomToggle = ({ changeHandler }) => {
 
 const ScaleDegreeSelector = ({ changeHandler }) => {
   return (
-    <fieldset onChange={ (evt) => changeHandler(evt.target.value) }>
+    <div className="scaleDegreeRadio" onChange={ (evt) => changeHandler(evt.target.value) }>
       <label>Hide</label>
       <input type="radio"
              name="degreeMode"
@@ -28,7 +28,7 @@ const ScaleDegreeSelector = ({ changeHandler }) => {
       <input type="radio"
              name="degreeMode"
              value="2" />
-    </fieldset>
+    </div>
   );
 }
 

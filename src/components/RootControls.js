@@ -31,12 +31,15 @@ const DisplayModeToggle = ({ changeHandler }) => {
 };
 
 const RootControls = (props) => {
-  const { rootDisplayMode, activeValue, changeHandler } = props;
-  const values = rootDisplayMode == 0 ? chromaticScale : circleOfFifths;
+  const { rootDisplayMode,
+          activeValue,
+          changeHandler } = props;
+
+  const displayValues = rootDisplayMode == 0 ? chromaticScale : circleOfFifths;
   const activeValueIdx = rootDisplayMode == 0 ?
                          activeValue : circleOfFifths.indexOf(activeValue);
 
-  const displayPanes = values.map((val, _) => {
+  const displayPanes = displayValues.map((val, _) => {
     let active = val == activeValue ? "active" : "";
     let classes = `displayPane ${active}`.trimEnd();
 
@@ -51,10 +54,10 @@ const RootControls = (props) => {
   });
 
   return (
-    <div className={ "rootControls" }>
+    <div className="rootControls">
       <input type="range"
               min="0"
-              max={ values.length - 1 }
+              max={ displayValues.length - 1 }
               value={ activeValueIdx }
               onChange={ (evt) => {
                 let targetVal = evt.target.valueAsNumber;

@@ -17,8 +17,6 @@ const SvgKeybed = (props) => {
         chordScaleDegrees,
         rootOnBottom } = props;
 
-  console.log(scaleDegreeMode);
-
   let keyIds = [];
 
   for (let i = 0; i < defaultOctaves; i++) {
@@ -60,10 +58,9 @@ const SvgKeybed = (props) => {
       viewBox="0 0 1400 600"
       id="keybed">
       <pattern id="inactive_fill"
-           width="16" height="20"
-           patternUnits="userSpaceOnUse"
-           patternTransform="rotate(45 50 50)"
-           >
+               width="16" height="20"
+               patternUnits="userSpaceOnUse"
+               patternTransform="rotate(45 50 50)">
         <line stroke="#676767" strokeWidth="12px" x1="6" x2="6" y2="20"/>             
         <line stroke="#a6a6a6" strokeWidth="18px" x1="16" x2="16" y2="20"/>
       </pattern>
