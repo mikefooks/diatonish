@@ -29,7 +29,7 @@ const ModeControls = (props) => {
   });
 
   return (
-    <div className="modeControls">
+    <div className="modeControl--input">
       <input type="range"
              min="0"
              max={ modeNames.length - 1 }
@@ -39,7 +39,7 @@ const ModeControls = (props) => {
       <div className="displayPanes">
         { displayPanes }
       </div>
-      <div className="activeModeName">
+      <div className="activeModeDisplay">
         { modeNames[activeMode] }
       </div>
     </div>

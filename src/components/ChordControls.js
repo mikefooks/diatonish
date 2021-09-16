@@ -25,7 +25,7 @@ const ChordControls = (props) => {
   });
 
   return (
-    <div className="chordControls">
+    <div className="chordControl--input">
       <input type="range"
               min="0"
               max={ chordNumerals.length - 1 }

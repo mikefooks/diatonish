@@ -37,7 +37,7 @@ path.inactive {
   );
 }
 
-#controlSliders {
+.controls {
   width: 1400px;
   /* display: flex; */
   input[type="range"] {
@@ -45,14 +45,14 @@ path.inactive {
   }  
 }
 
-.rootControls {
+.rootControl {
   flex-grow: 1;
 }
 
-.modeControls {
+.modeControl {
   flex-grow: 1;
 }
 
-.chordControls {
+.chordControl {
   flex-grow: 1;
 }
