@@ -8,8 +8,7 @@ import { getChordDegrees, getScale } from "./lib/Theory";
 
 // components
 import SvgKeybed from "./components/SvgKeybed";
-import { RootControls,
-         DisplayModeToggle } from "./components/RootControls";
+import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
 import ChordControls from "./components/ChordControls";
 import { ScaleDegreeSelector,
@@ -85,17 +84,10 @@ const App = (props) => {
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div className="controls">
-        <div className="rootControl">
-          <div className="rootControl--label">
-            <h3>Root</h3>
-          </div>
-          <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
-                        activeValue={ state.get("activeRoot") }
-                        changeHandler={ updateRoot } />
-          <div className="rootControl--options">
-            <DisplayModeToggle changeHandler={ toggleRootDisplay } />
-          </div>
-        </div>
+        <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
+                      activeRoot={ state.get("activeRoot") }
+                      updateRootFn={ updateRoot }
+                      updateDisplayModeFn={ toggleRootDisplay } />
         <ModeControls activeMode={ state.get("activeMode") }
                       changeHandler={ updateMode } />
         <div className="chordControl">

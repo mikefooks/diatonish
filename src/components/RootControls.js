@@ -14,9 +14,52 @@ const circleOfFifths = [
   0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5 
 ];
 
-const DisplayModeToggle = ({ changeHandler }) => {
+const RootSlider = (props) => {
+  const { rootDisplayMode,
+          activeRoot,
+          updateRootFn } = props;
+
+  const displayValues = rootDisplayMode == 0 ? chromaticScale : circleOfFifths;
+  const activeValueIdx = rootDisplayMode == 0 ?
+                         activeRoot : circleOfFifths.indexOf(activeRoot);
+
+  const displayPanes = displayValues.map((val, _) => {
+    let active = val == activeRoot ? "active" : "";
+    let classes = `displayPane ${active}`.trimEnd();
+
+    return (
+      <div className={ classes }
+           onMouseDown={ () => updateRootFn(val) }>
+        <h3>
+          { rootNames[val] }
+        </h3>
+      </div>
+    );
+  });
+
   return (
-    <div onChange={ (evt) => changeHandler(evt.target.value) }>
+    <div className="rootControl--input">
+      <input type="range"
+              min="0"
+              max={ displayValues.length - 1 }
+              value={ activeValueIdx }
+              onChange={ (evt) => {
+                let targetVal = evt.target.valueAsNumber;
+                if (rootDisplayMode == 0) {
+                  updateRootFn(chromaticScale[targetVal]);
+                } else {
+                  updateRootFn(circleOfFifths[targetVal]); 
+                } } } />
+      <div className="displayPanes">
+        { displayPanes }
+      </div>
+    </div>
+  );
+};
+
+const DisplayModeToggle = ({ updateDisplayModeFn }) => {
+  return (
+    <div onChange={ (evt) => updateDisplayModeFn(evt.target.value) }>
       <div>
         <label>Chromatic</label>
         <input type="radio"
@@ -35,49 +78,24 @@ const DisplayModeToggle = ({ changeHandler }) => {
 };
 
 const RootControls = (props) => {
-  const { rootDisplayMode,
-          activeValue,
-          changeHandler } = props;
-
-  const displayValues = rootDisplayMode == 0 ? chromaticScale : circleOfFifths;
-  const activeValueIdx = rootDisplayMode == 0 ?
-                         activeValue : circleOfFifths.indexOf(activeValue);
-
-  const displayPanes = displayValues.map((val, _) => {
-    let active = val == activeValue ? "active" : "";
-    let classes = `displayPane ${active}`.trimEnd();
-
-    return (
-      <div className={ classes }
-           onMouseDown={ () => changeHandler(val) }>
-        <h3>
-          { rootNames[val] }
-        </h3>
-      </div>
-    );
-  });
+  const { rootDisplayMode, 
+          activeRoot,
+          updateRootFn,
+          updateDisplayModeFn } = props;
 
   return (
-    <div className="rootControl--input">
-      <input type="range"
-              min="0"
-              max={ displayValues.length - 1 }
-              value={ activeValueIdx }
-              onChange={ (evt) => {
-                let targetVal = evt.target.valueAsNumber;
-                if (rootDisplayMode == 0) {
-                  changeHandler(chromaticScale[targetVal]);
-                } else {
-                  changeHandler(circleOfFifths[targetVal]); 
-                } } } />
-      <div className="displayPanes">
-        { displayPanes }
+    <div className="rootControl">
+      <div className="rootControl--label">
+        <h3>Root</h3>
+      </div>
+      <RootSlider rootDisplayMode={ rootDisplayMode }
+                  activeRoot={ activeRoot }
+                  updateRootFn={ updateRootFn } />
+      <div className="rootControl--options">
+        <DisplayModeToggle updateDisplayModeFn={ updateDisplayModeFn } />
       </div>
     </div>
   );
 };
 
-export {
-  DisplayModeToggle,
-  RootControls
-};
+export default RootControls;
