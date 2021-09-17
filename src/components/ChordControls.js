@@ -7,8 +7,8 @@ const chordNumerals = [
 
 const majorChordQualities = [0, 1, 1, 0, 0, 1, 2];
 
-const ChordControls = (props) => {
-  let { activeChord, changeHandler } = props;
+const ChordSlider = (props) => {
+  let { activeChord, updateChordFn } = props;
 
   let displayPanes = chordNumerals.map((val, idx) => {
     let active = idx == activeChord ? "active" : "";
@@ -16,7 +16,7 @@ const ChordControls = (props) => {
 
     return (
       <div className={ classes }
-           onMouseDown={ () => {  changeHandler(idx) } }>
+           onMouseDown={ () => {  updateChordFn(idx) } }>
         <h3>
           { val }
         </h3>
@@ -30,12 +30,27 @@ const ChordControls = (props) => {
               min="0"
               max={ chordNumerals.length - 1 }
               value={ activeChord }
-              onChange={ (evt) => changeHandler(evt.target.valueAsNumber) }/>
+              onChange={ (evt) => updateChordFn(evt.target.valueAsNumber) }/>
       <div className="displayPanes">
         { displayPanes }
       </div>
     </div>
   );
 };
+
+const ChordControls = (props) => {
+  const { activeChord,
+          updateChordFn } = props;
+
+  return (
+    <div className="chordControl">
+      <div className="chordControl--label">
+        <h3>Chord</h3>
+      </div>
+      <ChordSlider activeChord={ activeChord }
+                   updateChordFn={ updateChordFn } />
+    </div>
+  );
+}
 
 export default ChordControls;

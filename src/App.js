@@ -6,11 +6,13 @@ import { Map } from "immutable";
 import { defaultOctaves, defaultState } from "./config";
 import { getChordDegrees, getScale } from "./lib/Theory";
 
-// components
+// Components
 import SvgKeybed from "./components/SvgKeybed";
+
 import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
 import ChordControls from "./components/ChordControls";
+
 import { ScaleDegreeSelector,
          RootOnBottomToggle } from "./components/DisplayControls";
 
@@ -20,7 +22,10 @@ const App = (props) => {
   // Note: defaultState getting wrapped in an Immutable Map.
   const [ state, setState ] = useState(Map(defaultState));
 
-  // Handler functions for the root and mode selectors.
+  /**
+   * Change handler for the Root
+   * @param { Number } newRoot 
+   */
   function updateRoot(newRoot) {;
     let newScale = getScale(defaultOctaves,
                             newRoot,
@@ -34,11 +39,18 @@ const App = (props) => {
     setState(newState);
   }
 
-  // "root display mode" refers to chromatic/circle of fifths
+  /**
+   * Toggle between Chromatic and Circle of Fifths
+   * @param { Number (0 or 1) } val 
+   */
   function toggleRootDisplay(val) {
     setState(state.set("rootDisplayMode", val));
   }
 
+  /**
+   * Change handler for the Mode slider/buttons.
+   * @param { Number (0-6) } newMode 
+   */
   function updateMode(newMode) {
     let newScale = getScale(defaultOctaves,
                             state.get("activeRoot"),
@@ -52,6 +64,10 @@ const App = (props) => {
     setState(newState);
   }
 
+  /**
+   * Change handler for the Chord slider/buttons
+   * @param {Number (0-6)} newActiveChord 
+   */
   function updateChord(newActiveChord) {
     let newState = state.merge({
       activeChord: newActiveChord,
@@ -61,8 +77,13 @@ const App = (props) => {
     setState(newState);
   }
 
-  // Handlers for display option controls.
+  // Display options
 
+  /**
+   * Change handler for degree dispaly mode--
+   * hide, scale degrees or chord degrees.
+   * @param {Number (0-2)} value 
+   */
   function selectDegreeMode(value) {
     let newState = state.merge({
       scaleDegreeMode: value
@@ -71,6 +92,11 @@ const App = (props) => {
     setState(newState);
   }
 
+  /**
+   * Toggle whether the scale root is translated to the
+   * bottom of the keybed display.
+   * @param { Boolean } checked 
+   */
   function toggleRootOnBottom(checked) {
     setState(state.set("rootOnBottom", checked));
   }
@@ -90,18 +116,13 @@ const App = (props) => {
                       updateDisplayModeFn={ toggleRootDisplay } />
         <ModeControls activeMode={ state.get("activeMode") }
                       changeHandler={ updateMode } />
-        <div className="chordControl">
-          <div className="chordControl--label">
-            <h3>Chord</h3>
-          </div>
-          <ChordControls activeChord={ state.get("activeChord") }
-                         changeHandler={ updateChord } />
-        </div>
-        { /* display controls */ }
-        <div class="displayOptions">
-          <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
-          <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
-        </div>
+        <ChordControls activeChord={ state.get("activeChord") }
+                       updateChordFn={ updateChord } />
+      </div>
+      { /* display controls */ }
+      <div className="displayOptions">
+        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
+        <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
       </div>
     </div>
   );
