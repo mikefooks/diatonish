@@ -49,6 +49,9 @@ const ChordControls = (props) => {
       </div>
       <ChordSlider activeChord={ activeChord }
                    updateChordFn={ updateChordFn } />
+      <div className="chordControl--options">
+        <h3>Chord Name</h3>
+      </div>
     </div>
   );
 }

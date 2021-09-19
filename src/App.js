@@ -110,19 +110,21 @@ const App = (props) => {
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div className="controls">
-        <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
-                      activeRoot={ state.get("activeRoot") }
-                      updateRootFn={ updateRoot }
-                      updateDisplayModeFn={ toggleRootDisplay } />
-        <ModeControls activeMode={ state.get("activeMode") }
-                      changeHandler={ updateMode } />
-        <ChordControls activeChord={ state.get("activeChord") }
-                       updateChordFn={ updateChord } />
-      </div>
+        <div className="musicControls">
+          <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
+                        activeRoot={ state.get("activeRoot") }
+                        updateRootFn={ updateRoot }
+                        updateDisplayModeFn={ toggleRootDisplay } />
+          <ModeControls activeMode={ state.get("activeMode") }
+                        changeHandler={ updateMode } />
+          <ChordControls activeChord={ state.get("activeChord") }
+                        updateChordFn={ updateChord } />
+        </div>
       { /* display controls */ }
-      <div className="displayOptions">
-        <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
-        <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
+        <div className="displayOptions">
+          <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
+          <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 path.inactive {
   background: repeating-linear-gradient(
     45deg,
@@ -8,13 +12,84 @@ path.inactive {
   );
 }
 
-.displayPanes {
-  display: flex;
-  background: rgb(34,34,34);
+input[type="range"] {
+  width: 100%;
+}
 
-  h3 {
-    text-align: center;
-  }
+#appWindow {
+  width: 1400px;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.musicControls {
+  width: 1100px;
+}
+
+.rootControl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.rootControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.rootControl--input {
+  width: 70%;
+}
+
+.rootControl--options {
+  padding: .5em 1em;
+  text-align: right;
+  width: 20%;
+}
+
+.modeControl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.modeControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.modeControl--input {
+  width: 70%;
+}
+
+.modeControl--options {
+  padding: .5em 1em;
+  text-align: center;
+  width: 20%;
+}
+
+.chordControl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.chordControl--label {
+  width: 10%;
+  padding: .5em 1em;
+}
+
+.chordControl--input {
+  width: 70%;
+}
+
+.chordControl--options {
+  width: 20%;
+  text-align: center;
 }
 
 .displayPane {
@@ -30,60 +105,15 @@ path.inactive {
   );
 }
 
-.controls {
-  width: 1400px;
-  /* display: flex; */
-  input[type="range"] {
-    width: 100%;
-  }  
-}
-
-.rootControl {
+.displayPanes {
   display: flex;
-  flex-grow: 1;
+  background: rgb(34,34,34);
+
+  h3 {
+    text-align: center;
+  }
 }
 
-.rootControl--label {
-  width: 10%;
-  padding: .5em 1em;
-}
-
-.rootControl--input {
-  width: 70%;
-}
-
-.rootControl--options {
-  padding: .5em 1em;
-}
-
-.modeControl {
-  display: flex;
-  flex-grow: 1;
-}
-
-.modeControl--label {
-  width: 10%;
-  padding: .5em 1em;
-}
-
-.modeControl--input {
-  width: 70%;
-}
-
-.modeControl--options {
-  padding: .5em 1em;
-}
-
-.chordControl {
-  display: flex;
-  flex-grow: 1;
-}
-
-.chordControl--label {
-  width: 10%;
-  padding: .5em 1em;
-}
-
-.chordControl--input {
-  width: 70%;
+.displayOptions {
+  width: 300px;
 }
