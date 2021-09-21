@@ -117,8 +117,9 @@ const App = (props) => {
                         updateDisplayModeFn={ toggleRootDisplay } />
           <ModeControls activeMode={ state.get("activeMode") }
                         changeHandler={ updateMode } />
-          <ChordControls activeChord={ state.get("activeChord") }
-                        updateChordFn={ updateChord } />
+          <ChordControls activeMode={ state.get("activeMode") }
+                         activeChord={ state.get("activeChord") }
+                         updateChordFn={ updateChord } />
         </div>
       { /* display controls */ }
         <div className="displayOptions">
