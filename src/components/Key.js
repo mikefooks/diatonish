@@ -9,13 +9,20 @@ function isBlack(keyId) {
   return blackKeys.includes(keyId % 12);
 }
 
-function getFillColor(blackKey, isActive, isChordTone) {
+function getFillColor(blackKey, isActive, chordToneIdx) {
   if (!isActive) {
     return "url(#inactive_fill)";
   }
 
-  if (isChordTone) {
-    return "#f0a";
+  switch (chordToneIdx) {
+    case -1:
+      break;
+    case 0:
+      return "rgb(255, 0, 0)";
+    case 1:
+      return "rgb(192, 0, 0)";
+    case 2:
+      return "rgb(127, 0, 0)";  
   }
 
   return blackKey ? "#000" : "#fff";
@@ -62,8 +69,14 @@ function scaleDegreeEl(degree, isActive, blackKey) {
 }
 
 const Key = (props) => {
-  let { keyId, keyName, degree, isActive, isRoot, isChordTone } = props;
-  let blackKey = isBlack(keyId);
+  const { keyId,
+          keyName,
+          degree,
+          chordToneIdx,
+          isActive,
+          isRoot } = props;
+  
+  const blackKey = isBlack(keyId);
 
   return (
     <svg 
@@ -77,7 +90,7 @@ const Key = (props) => {
         height="100%"
         x={ 0 }
         y={ 0 }
-        fill={ getFillColor(blackKey, isActive, isChordTone) }
+        fill={ getFillColor(blackKey, isActive, chordToneIdx) }
         fillOpacity={1}
         strokeWidth={ isActive ? 1 : 0 }
         strokeMiterlimit={4}

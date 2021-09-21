@@ -46,6 +46,7 @@ const SvgKeybed = (props) => {
                 keyName={ keyName }
                 degree={ degree }
                 isChordTone={ isChordTone }
+                chordToneIdx={ isChordTone ? chordToneIdx : "" }
                 isActive={ isActive } 
                 isRoot={ activeRoot == (key % 12) } />;
   });

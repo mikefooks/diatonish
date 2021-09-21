@@ -81,8 +81,6 @@ const ChordControls = (props) => {
   let scaleNotes = getScaleNotes(activeRoot, activeMode);
   let activeChordName = getChordName(scaleNotes[activeChord], activeChordQuality);
 
-  console.log
-
   return (
     <div className="chordControl">
       <div className="chordControl--label">
