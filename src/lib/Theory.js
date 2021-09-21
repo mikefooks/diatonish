@@ -6,19 +6,19 @@ const keySignatures = [
   // G major / E minor (1 sharp)
   { root: 7,
     sig: [0, 2, 4, 6, 7, 9, 11],
-    names: ["C", "D", "E", "F#", "G", "A", "B"] },
+    names: ["C", "D", "E", "F\u266F", "G", "A", "B"] },
   // D major / B minor (2 sharps)
   { root: 2,
     sig: [1, 2, 4, 6, 7, 9, 11],
-    names: [ "C#", "D", "E", "F#", "G", "A", "B" ] },
+    names: [ "C\u266F", "D", "E", "F\u266F", "G", "A", "B" ] },
   // A major / F# minor (3 sharps)
   { root: 9,
     sig: [1, 2, 4, 6, 8, 9, 11],
-    names: [ "C#", "D", "E", "F#", "G#", "A", "B" ] },
+    names: [ "C\u266F", "D", "E", "F\u266F", "G\u266F", "A", "B" ] },
   // E major / C# minor (4 sharps)
   { root: 4,
     sig: [1, 3, 4, 6, 8, 9, 11],
-    names: [ "C#", "D#", "E", "F#", "G#", "A", "B" ] },
+    names: [ "C\u266F", "D\u266F", "E", "F\u266F", "G\u266F", "A", "B" ] },
   /*
   the following three key signatures could be interpreted differently 
   depending on the context and the musician's purposes/needs.
@@ -26,32 +26,32 @@ const keySignatures = [
   // B major / G# minor (5 sharps)
   { root: 11,
     sig: [1, 3, 4, 6, 8, 10, 11],
-    names: [ "C#", "D#", "E", "F#", "G#", "A#", "B" ] },
+    names: [ "C\u266F", "D\u266F", "E", "F\u266F", "G\u266F", "A\u266F", "B" ] },
   // Gb major / Eb minor (6 flats)
   { root: 6,
     sig: [1, 3, 5, 6, 8, 10, 11],
-    names: [ "Db", "Eb", "F", "Gb", "Ab", "Bb", "Cb" ] },
+    names: [ "D\u266D", "E\u266D", "F", "G\u266D", "A\u266D", "B\u266D", "C\u266D" ] },
   // Db Major / Bb minor (5 flats)
   { root: 1,
     sig: [0, 1, 3, 5, 6, 8, 10],
-    names: [ "C", "Db", "Eb", "F", "Gb", "Ab", "Bb" ] },
+    names: [ "C", "D\u266D", "E\u266D", "F", "G\u266D", "A\u266D", "B\u266D" ] },
   /**/
   // Ab major / F minor (4 flats)
   { root: 8,
     sig: [0, 1, 3, 5, 7, 8, 10],
-    names: [ "C", "Db", "Eb", "F", "G", "Ab", "Bb" ] },
+    names: [ "C", "D\u266D", "E\u266D", "F", "G", "A\u266D", "B\u266D" ] },
   // Eb major / C minor (3 flats)
   { root: 3,
     sig: [0, 2, 3, 5, 7, 8, 10],
-    names: [ "C", "D", "Eb", "F", "G", "Ab", "Bb" ] },
+    names: [ "C", "D", "E\u266D", "F", "G", "A\u266D", "B\u266D" ] },
   // Bb major / G minor (2 flats)
   { root: 10,
     sig: [0, 2, 3, 5, 7, 9, 10],
-    names: [ "C", "D", "Eb", "F", "G", "A", "Bb" ] },
+    names: [ "C", "D", "E\u266D", "F", "G", "A", "B\u266D" ] },
   // F major / D minor (1 flat)
   { root: 5,
     sig: [0, 2, 4, 5, 7, 9, 10],
-    names: [ "C", "D", "E", "F", "G", "A", "Bb" ]}
+    names: [ "C", "D", "E", "F", "G", "A", "B\u266D" ]}
 ];
 
 const modeDisplacements = [
@@ -67,6 +67,14 @@ const circleOfFifths = [
   "C", "G", "D", "A", "E", "B", "F\u266F/G\u266D", "C\u266F/D\u266D",
   "G\u266F/A\u266D", "D\u266F/E\u266D", "A\u266F/B\u266D", "F"
 ];
+
+// utility fn: take the first n elements of an array and stick them on
+// the back of the array. 
+function rotate(array, n) {
+  let front = array.slice(0, n);
+  let back = array.slice(n);
+  return back.concat(front)
+}
 
 // find the correct key signature, given a root note and the mode.
 function getModeAdjustedSignature(root, modeIdx) {
@@ -87,8 +95,16 @@ function getScaleDegrees(root, keySig) {
       back.push(i+1);
     }
   }
-  
+
   return front.concat(back);
+}
+
+// get the names of the notes in a keysig, rotated to reflect
+// a particular root and mode.
+function getScaleNotes(root, modeIdx) {
+  let keySig = getModeAdjustedSignature(root, modeIdx);
+  let scaleNotes = rotate(keySig.names, keySig.sig.indexOf(root));
+  return scaleNotes;
 }
 
 // Get the particular keys in a mode/scale.
@@ -119,6 +135,8 @@ export {
   keySignatures,
   chromaticScale,
   circleOfFifths,
+  rotate,
   getScale,
+  getScaleNotes,
   getChordDegrees
 };

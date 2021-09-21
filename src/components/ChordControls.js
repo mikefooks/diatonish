@@ -1,6 +1,8 @@
 import React from "react";
 
-import { chromaticScale } from "../lib/Theory";
+import { chromaticScale,
+         rotate,
+         getScaleNotes } from "../lib/Theory";
 
 
 const numerals = [
@@ -22,22 +24,14 @@ function getChordQuality(numeral, quality) {
   }
 }
 
-// take the first n elements of an array and stick them on
-// the back of the array. 
-function rotate(array, n) {
-  let front = array.slice(0, n);
-  let back = array.slice(n);
-  return back.concat(front)
-}
-
 function getChordName(rootNote, quality) {
   switch (quality) {
     case 0:
-      return chromaticScale[rootNote] + "maj";
+      return rootNote + "maj";
     case 1:
-      return chromaticScale[rootNote] + "min";
+      return rootNote + "min";
     case 2:
-      return chromaticScale[rootNote] + "dim";
+      return rootNote + "dim";
   }
 }
 
@@ -78,13 +72,16 @@ const ChordSlider = (props) => {
 };
 
 const ChordControls = (props) => {
-  const { activeMode,
-          activeKeys,
+  const { activeRoot,
+          activeMode,
           activeChord,
           updateChordFn } = props;
 
-  console.log(activeKeys);
-  console.log(activeChord);
+  let activeChordQuality = rotate(majorChordQualities, activeMode)[activeChord];
+  let scaleNotes = getScaleNotes(activeRoot, activeMode);
+  let activeChordName = getChordName(scaleNotes[activeChord], activeChordQuality);
+
+  console.log
 
   return (
     <div className="chordControl">
@@ -95,7 +92,7 @@ const ChordControls = (props) => {
                    activeChord={ activeChord }
                    updateChordFn={ updateChordFn } />
       <div className="chordControl--options">
-        <h3>Chord Name</h3>
+        <h3>{ activeChordName }</h3>
       </div>
     </div>
   );
