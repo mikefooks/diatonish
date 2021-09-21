@@ -118,6 +118,7 @@ const App = (props) => {
           <ModeControls activeMode={ state.get("activeMode") }
                         changeHandler={ updateMode } />
           <ChordControls activeMode={ state.get("activeMode") }
+                         activeKeys={ state.get("activeKeys") }
                          activeChord={ state.get("activeChord") }
                          updateChordFn={ updateChord } />
         </div>

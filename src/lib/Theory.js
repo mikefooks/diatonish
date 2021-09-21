@@ -87,6 +87,7 @@ function getScaleDegrees(root, keySig) {
       back.push(i+1);
     }
   }
+  
   return front.concat(back);
 }
 

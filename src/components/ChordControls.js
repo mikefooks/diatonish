@@ -1,5 +1,7 @@
 import React from "react";
 
+import { chromaticScale } from "../lib/Theory";
+
 
 const numerals = [
   "i", "ii", "iii", "iv", "v", "vi", "vii"
@@ -15,6 +17,8 @@ function getChordQuality(numeral, quality) {
       return numeral;
     case 2:
       return numeral + "o";
+    default:
+      return numeral;
   }
 }
 
@@ -24,6 +28,17 @@ function rotate(array, n) {
   let front = array.slice(0, n);
   let back = array.slice(n);
   return back.concat(front)
+}
+
+function getChordName(rootNote, quality) {
+  switch (quality) {
+    case 0:
+      return chromaticScale[rootNote] + "maj";
+    case 1:
+      return chromaticScale[rootNote] + "min";
+    case 2:
+      return chromaticScale[rootNote] + "dim";
+  }
 }
 
 const ChordSlider = (props) => {
@@ -40,7 +55,7 @@ const ChordSlider = (props) => {
 
     return (
       <div className={ classes }
-           onMouseDown={ () => {  updateChordFn(idx) } }>
+           onMouseDown={ () => { updateChordFn(idx) } }>
         <h3>
           { val }
         </h3>
@@ -64,8 +79,12 @@ const ChordSlider = (props) => {
 
 const ChordControls = (props) => {
   const { activeMode,
+          activeKeys,
           activeChord,
           updateChordFn } = props;
+
+  console.log(activeKeys);
+  console.log(activeChord);
 
   return (
     <div className="chordControl">
