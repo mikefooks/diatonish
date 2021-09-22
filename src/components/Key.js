@@ -50,6 +50,7 @@ function keyNameEl(keyName, isActive, blackKey) {
     <text
       x="40%"
       y="80%"
+      strokeWidth="0px"
       fill={ blackKey ? "#fff" : "#000" }>
         { keyName }
     </text>
@@ -64,6 +65,7 @@ function scaleDegreeEl(degree, isActive, blackKey) {
     <text
       x="40%"
       y="90%"
+      strokeWidth="0px"
       fill={ blackKey ? "#fff" : "#000" }>
         { degree }
     </text>

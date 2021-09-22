@@ -12,6 +12,10 @@ path.inactive {
   );
 }
 
+label, h3, text {
+  font-family: 'Nunito', sans-serif;
+}
+
 input[type="range"] {
   width: 100%;
 }
