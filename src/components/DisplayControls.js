@@ -3,7 +3,7 @@ import React from "react";
 
 const RootOnBottomToggle = ({ changeHandler }) => {
   return (
-    <div className="rootOnBottomCheck">
+    <div className="rootOnBottomToggle">
       <label>Root on Bottom</label>
       <input name="rootOnBottom"
              type="checkbox"
@@ -12,9 +12,10 @@ const RootOnBottomToggle = ({ changeHandler }) => {
   );
 }
 
-const ScaleDegreeSelector = ({ changeHandler }) => {
+const DegreeModeSelector = ({ changeHandler }) => {
   return (
-    <div className="scaleDegreeRadio" onChange={ (evt) => changeHandler(evt.target.value) }>
+    <div className="scaleDegreeSelector"
+         onChange={ (evt) => changeHandler(evt.target.value) }>
       <div>
         <label>Hide</label>
         <input type="radio"
@@ -38,7 +39,30 @@ const ScaleDegreeSelector = ({ changeHandler }) => {
   );
 }
 
+const ChordModeSelector = ({ changeHandler }) => {
+  return (
+    <div className="chordModeSelector"
+         onChange={ (evt) => changeHandler(evt.target.value) }>
+      <div>
+        <label>Triads</label>
+        <input type="radio"
+               name="chordMode"
+               value="0"
+               defaultChecked />
+      </div>
+      <div>
+        <label>Sevenths</label>
+        <input type="radio"
+               name="chordMode"
+               value="1" />
+      </div>
+    </div>
+  )
+}
+
+
 export {
   RootOnBottomToggle,
-  ScaleDegreeSelector
+  DegreeModeSelector,
+  ChordModeSelector
 };

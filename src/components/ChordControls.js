@@ -1,15 +1,20 @@
 import React from "react";
 
-import { chromaticScale,
-         rotate,
-         getScaleNotes } from "../lib/Theory";
+import { 
+  rotate,
+  getScaleNotes
+} from "../lib/Theory";
 
 
 const numerals = [
   "i", "ii", "iii", "iv", "v", "vi", "vii"
 ];
 
-const majorChordQualities = [0, 1, 1, 0, 0, 1, 2];
+// 0 = major, 1 = minor, 2 = diminished
+const triadChordQualities = [0, 1, 1, 0, 0, 1, 2];
+
+// 0 = major 7, 1 = minor 7, 2 = half-diminished, 3 = dominant 7
+const seventhChordQualities = [0, 1, 1, 0, 3, 1, 2];
 
 function getChordQuality(numeral, quality) {
   switch (quality) {
@@ -24,21 +29,34 @@ function getChordQuality(numeral, quality) {
   }
 }
 
-function getChordName(rootNote, quality) {
-  switch (quality) {
-    case 0:
-      return rootNote + "maj";
-    case 1:
-      return rootNote + "min";
-    case 2:
-      return rootNote + "dim";
+function getChordName(rootNote, chordMode, quality) {
+  if (chordMode == 0) {
+    switch (quality) {
+      case 0:
+        return rootNote + "maj";
+      case 1:
+        return rootNote + "min";
+      case 2:
+        return rootNote + "dim";
+    }
+  } else {
+    switch (quality) {
+      case 0:
+        return rootNote + "maj7";
+      case 1:
+        return rootNote + "min7";
+      case 2:
+        return rootNote + "dim7";
+      case 3:
+        return rootNote + "7";
+    }
   }
 }
 
 const ChordSlider = (props) => {
   let { activeMode, activeChord, updateChordFn } = props;
 
-  let chordQualities = rotate(majorChordQualities, activeMode);
+  let chordQualities = rotate(triadChordQualities, activeMode);
   let chordNumerals = numerals.map((val, idx) => {
     return getChordQuality(val, chordQualities[idx]);
   });
@@ -74,12 +92,24 @@ const ChordSlider = (props) => {
 const ChordControls = (props) => {
   const { activeRoot,
           activeMode,
+          chordMode,
           activeChord,
           updateChordFn } = props;
 
-  let activeChordQuality = rotate(majorChordQualities, activeMode)[activeChord];
+  let activeChordQuality;
+  
+  if (chordMode == 0) {
+    activeChordQuality = rotate(triadChordQualities, activeMode)[activeChord];
+  } else if (chordMode == 1) {
+    activeChordQuality = rotate(seventhChordQualities, activeMode)[activeChord];
+  }
+
   let scaleNotes = getScaleNotes(activeRoot, activeMode);
-  let activeChordName = getChordName(scaleNotes[activeChord], activeChordQuality);
+  let activeChordName = getChordName(scaleNotes[activeChord],
+                                     chordMode,
+                                     activeChordQuality);
+  
+  console.log(activeChordQuality);
 
   return (
     <div className="chordControl">

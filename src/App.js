@@ -13,8 +13,11 @@ import RootControls from "./components/RootControls";
 import ModeControls from "./components/ModeControls";
 import ChordControls from "./components/ChordControls";
 
-import { ScaleDegreeSelector,
-         RootOnBottomToggle } from "./components/DisplayControls";
+import {
+  RootOnBottomToggle,
+  DegreeModeSelector,
+  ChordModeSelector
+} from "./components/DisplayControls";
 
 
 const App = (props) => {
@@ -80,6 +83,15 @@ const App = (props) => {
   // Display options
 
   /**
+   * Toggle whether the scale root is translated to the
+   * bottom of the keybed display.
+   * @param { Boolean } checked 
+   */
+   function toggleRootOnBottom(checked) {
+    setState(state.set("rootOnBottom", checked));
+  }
+
+  /**
    * Change handler for degree dispaly mode--
    * hide, scale degrees or chord degrees.
    * @param {Number (0-2)} value 
@@ -93,12 +105,15 @@ const App = (props) => {
   }
 
   /**
-   * Toggle whether the scale root is translated to the
-   * bottom of the keybed display.
-   * @param { Boolean } checked 
+   * Show either triads or seventh chords.
+   * @param { Number 0,1 } value 
    */
-  function toggleRootOnBottom(checked) {
-    setState(state.set("rootOnBottom", checked));
+  function selectChordMode(value) {
+    const newState = state.merge({
+      chordMode: value
+    });
+
+    setState(newState);
   }
 
   return (
@@ -110,6 +125,7 @@ const App = (props) => {
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") } />
       <div className="controls">
+        { /* musical parameter controls */ }
         <div className="musicControls">
           <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
                         activeRoot={ state.get("activeRoot") }
@@ -119,13 +135,15 @@ const App = (props) => {
                         changeHandler={ updateMode } />
           <ChordControls activeRoot={ state.get("activeRoot") }
                          activeMode={ state.get("activeMode") }
+                         chordMode={ state.get("chordMode") }
                          activeChord={ state.get("activeChord") }
                          updateChordFn={ updateChord } />
         </div>
-      { /* display controls */ }
+        { /* display controls */ }
         <div className="displayOptions">
           <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
-          <ScaleDegreeSelector changeHandler={ selectDegreeMode } />
+          <DegreeModeSelector changeHandler={ selectDegreeMode } />
+          <ChordModeSelector changeHandler={ selectChordMode } />
         </div>
       </div>
     </div>

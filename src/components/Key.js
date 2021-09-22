@@ -22,7 +22,7 @@ function getFillColor(blackKey, isActive, chordToneIdx) {
     case 1:
       return "rgb(192, 0, 0)";
     case 2:
-      return "rgb(127, 0, 0)";  
+      return "rgb(127, 0, 0)";
   }
 
   return blackKey ? "#000" : "#fff";
