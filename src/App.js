@@ -74,7 +74,8 @@ const App = (props) => {
   function updateChord(newActiveChord) {
     let newState = state.merge({
       activeChord: newActiveChord,
-      chordScaleDegrees: getChordDegrees(newActiveChord)
+      chordScaleDegrees: getChordDegrees(newActiveChord,
+                                         state.get("chordMode"))
     });
 
     setState(newState);
@@ -108,9 +109,11 @@ const App = (props) => {
    * Show either triads or seventh chords.
    * @param { Number 0,1 } value 
    */
-  function selectChordMode(value) {
+  function selectChordMode(newChordMode) {
     const newState = state.merge({
-      chordMode: value
+      chordMode: newChordMode,
+      chordScaleDegrees: getChordDegrees(state.get("activeChord"),
+                                         newChordMode)
     });
 
     setState(newState);

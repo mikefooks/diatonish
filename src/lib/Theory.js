@@ -127,8 +127,12 @@ function getScale(octaves, root, modeIdx) {
 }
 
 // type refers to triad or seventh.
-function getChordDegrees(root) {
-  return [ root, root + 2, root + 4].map(v => (v % 7) + 1);
+function getChordDegrees(root, chordMode) {
+  if (chordMode == 0) {
+    return [ 0, 2, 4 ].map(v => root + v).map(v => (v % 7) + 1);
+  } else if (chordMode == 1) {
+    return [ 0, 2, 4, 6 ].map(v => root + v).map(v => (v % 7) + 1);
+  }
 }
 
 export {

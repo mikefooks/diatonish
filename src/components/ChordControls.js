@@ -108,8 +108,6 @@ const ChordControls = (props) => {
   let activeChordName = getChordName(scaleNotes[activeChord],
                                      chordMode,
                                      activeChordQuality);
-  
-  console.log(activeChordQuality);
 
   return (
     <div className="chordControl">
