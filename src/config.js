@@ -6,8 +6,8 @@ const defaultState = {
   // display options
   rootDisplayMode: 0, // 0 for chromatic, 1 for circle of fifths
   rootOnBottom: false,
-  scaleDegreeMode: 0,
-  chordMode: 0, // 0 for triads, 1 for sevenths.
+  chordMode: 0, // 0 for hide, 1 for triads, 2 for sevenths.
+  scaleDegreeMode: 0, // 0 for hide, 1 for scale degrees, 2 for chord degrees.
 
   // scale & chord state
   activeRoot: 0,

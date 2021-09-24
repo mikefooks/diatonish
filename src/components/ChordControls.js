@@ -30,7 +30,7 @@ function getChordQuality(numeral, quality) {
 }
 
 function getChordName(rootNote, chordMode, quality) {
-  if (chordMode == 0) {
+  if (chordMode == 1) {
     switch (quality) {
       case 0:
         return rootNote + "maj";
@@ -39,7 +39,7 @@ function getChordName(rootNote, chordMode, quality) {
       case 2:
         return rootNote + "dim";
     }
-  } else {
+  } else if (chordMode == 2) {
     switch (quality) {
       case 0:
         return rootNote + "maj7";
@@ -98,9 +98,9 @@ const ChordControls = (props) => {
 
   let activeChordQuality;
   
-  if (chordMode == 0) {
+  if (chordMode == 1) {
     activeChordQuality = rotate(triadChordQualities, activeMode)[activeChord];
-  } else if (chordMode == 1) {
+  } else if (chordMode == 2) {
     activeChordQuality = rotate(seventhChordQualities, activeMode)[activeChord];
   }
 

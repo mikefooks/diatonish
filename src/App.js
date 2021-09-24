@@ -84,11 +84,11 @@ const App = (props) => {
   // Display options
 
   /**
-   * Toggle whether the scale root is translated to the
-   * bottom of the keybed display.
-   * @param { Boolean } checked 
-   */
-   function toggleRootOnBottom(checked) {
+ * Toggle whether the scale root is translated to the
+ * bottom of the keybed display.
+ * @param { Boolean } checked 
+ */
+  function toggleRootOnBottom(checked) {
     setState(state.set("rootOnBottom", checked));
   }
 
@@ -123,10 +123,11 @@ const App = (props) => {
     <div id="appWindow">
       <SvgKeybed activeRoot= { state.get("activeRoot") }
                  activeKeys={ state.get("activeKeys") }
-                 scaleDegreeMode={ state.get("scaleDegreeMode") }
                  activeChord={ state.get("activeChord") }
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
-                 rootOnBottom={ state.get("rootOnBottom") } />
+                 rootOnBottom={ state.get("rootOnBottom") }
+                 scaleDegreeMode={ state.get("scaleDegreeMode") }
+                 chordMode={ state.get("chordMode") } />
       <div className="controls">
         { /* musical parameter controls */ }
         <div className="musicControls">

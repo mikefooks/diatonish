@@ -18,13 +18,13 @@ function getFillColor(blackKey, isActive, chordToneIdx) {
     case -1:
       break;
     case 0:
-      return "rgb(255, 0, 0)";
+      return "rgb(174, 227, 104)";
     case 1:
-      return "rgb(192, 0, 0)";
+      return "rgb(179, 235, 111)";
     case 2:
-      return "rgb(127, 0, 0)";
+      return "rgb(183, 243, 119)";
     case 3:
-      return "rgb(96, 0, 0)";
+      return "rgb(188, 251, 126)";
   }
 
   return blackKey ? "#000" : "#fff";
@@ -34,18 +34,19 @@ function isRootRing(isRoot) {
   if (!isRoot) {
     return null;
   }
-  return <circle cy="80%"
-                 cx="40%"
+  return <circle cy="79%"
+                 cx="45%"
                  r="20px"
                  fill="none"
-                 stroke="orange"
-                 strokeWidth="2px"/>;
+                 stroke="rgb(127, 127, 127)"
+                 strokeWidth="2px" />;
 }
 
 function keyNameEl(keyName, isActive, blackKey) {
   if (!isActive) {
     return null;
   }
+
   return (
     <text
       x="40%"
@@ -61,6 +62,7 @@ function scaleDegreeEl(degree, isActive, blackKey) {
   if (!isActive) {
     return null;
   }
+
   return (
     <text
       x="40%"
@@ -95,7 +97,7 @@ const Key = (props) => {
         x={ 0 }
         y={ 0 }
         fill={ getFillColor(blackKey, isActive, chordToneIdx) }
-        fillOpacity={1}
+        fillOpacity={ isActive ? 1 : .3 }
         strokeWidth={ isActive ? 1 : 0 }
         strokeMiterlimit={4}
         strokeDasharray="none"

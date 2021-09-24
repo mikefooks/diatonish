@@ -11,12 +11,16 @@ const renderOrder = [
 ];
 
 const SvgKeybed = (props) => {
-  let { activeRoot,
-        activeKeys,
-        scaleDegreeMode,
-        chordScaleDegrees,
-        rootOnBottom } = props;
+  const { activeRoot,
+          activeKeys,
+          chordMode,
+          scaleDegreeMode,
+          chordScaleDegrees,
+          rootOnBottom } = props;
 
+  // Since SVG uses a painter's model to determine z-order,
+  // we need to order element rendering in such a way that black
+  // keys are not rendered over.
   let keyIds = [];
 
   for (let i = 0; i < defaultOctaves; i++) {
@@ -27,9 +31,21 @@ const SvgKeybed = (props) => {
 
   const keyEls = keyIds.map((key, _) => {
     let isActive = activeKeys.hasOwnProperty(key);
-    let isChordTone = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree) >= 0;
-    let chordToneIdx = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree);
     let keyName = isActive ? activeKeys[key].name : "";
+
+    // Chord display details are irrelevant if showChord display option
+    // is false.
+
+    let isChordTone, chordToneIdx;
+
+    if (chordMode > 0) {
+      isChordTone = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree) >= 0;
+      chordToneIdx = isActive && chordScaleDegrees.indexOf(activeKeys[key].degree);
+    } else {
+      isChordTone = false;
+      chordToneIdx = 0;
+    }
+
     let degree;
 
     if (isActive) {
@@ -51,12 +67,17 @@ const SvgKeybed = (props) => {
                 isRoot={ activeRoot == (key % 12) } />;
   });
 
+  // Scale factor .8571 takes it from 1400px wide to 1200px.
+
+  let translateValue = rootOnBottom ? "translate(" + (-1 * xTranslations[activeRoot]) + ")" : "";
+  translateValue += " scale(.8571)";
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={1400}
-      height={600}
-      viewBox="0 0 1400 600"
+      width="1200"
+      height="514"
+      viewBox="0 0 1200 514"
       id="keybed">
       <pattern id="inactive_fill"
                width="16" height="20"
@@ -66,7 +87,7 @@ const SvgKeybed = (props) => {
         <line stroke="#a6a6a6" strokeWidth="18px" x1="16" x2="16" y2="20"/>
       </pattern>
       <g id="keybed_group"
-         transform={ rootOnBottom ? "translate(" + (-1 * xTranslations[activeRoot]) + ")" : "" } 
+         transform={ translateValue } 
          stroke="#000">
         { keyEls }
       </g>
