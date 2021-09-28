@@ -14,7 +14,7 @@ const SvgKeybed = (props) => {
   const { activeRoot,
           activeKeys,
           chordMode,
-          scaleDegreeMode,
+          degreeMode,
           chordScaleDegrees,
           rootOnBottom } = props;
 
@@ -49,11 +49,11 @@ const SvgKeybed = (props) => {
     let degree;
 
     if (isActive) {
-      if (scaleDegreeMode == 0) {
+      if (degreeMode == 0) {
         degree = "";
-      } else if (scaleDegreeMode == 1) {
+      } else if (degreeMode == 1) {
         degree = activeKeys[key].degree;
-      } else if (scaleDegreeMode == 2) {
+      } else if (degreeMode == 2) {
         degree = isChordTone ? (chordToneIdx * 2) + 1 : "";
       }  
     }

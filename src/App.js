@@ -99,7 +99,7 @@ const App = (props) => {
    */
   function selectDegreeMode(value) {
     let newState = state.merge({
-      scaleDegreeMode: value
+      degreeMode: value
     });
 
     setState(newState);
@@ -126,7 +126,7 @@ const App = (props) => {
                  activeChord={ state.get("activeChord") }
                  chordScaleDegrees={ state.get("chordScaleDegrees") }
                  rootOnBottom={ state.get("rootOnBottom") }
-                 scaleDegreeMode={ state.get("scaleDegreeMode") }
+                 degreeMode={ state.get("degreeMode") }
                  chordMode={ state.get("chordMode") } />
       <div className="controls">
         { /* musical parameter controls */ }
