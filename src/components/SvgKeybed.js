@@ -49,13 +49,13 @@ const SvgKeybed = (props) => {
     let degree;
 
     if (isActive) {
-      if (degreeMode == 0) {
-        degree = "";
-      } else if (degreeMode == 1) {
+      if (degreeMode == 1) {
         degree = activeKeys[key].degree;
       } else if (degreeMode == 2) {
         degree = isChordTone ? (chordToneIdx * 2) + 1 : "";
-      }  
+      } else {
+        degree = "";
+      }
     }
 
     return <Key keyId={ key }
@@ -69,8 +69,14 @@ const SvgKeybed = (props) => {
 
   // Scale factor .8571 takes it from 1400px wide to 1200px.
 
-  let translateValue = rootOnBottom ? "translate(" + (-1 * xTranslations[activeRoot]) + ")" : "";
-  translateValue += " scale(.8571)";
+  const scaleFactor = .8571;
+  let translateValue = "";
+
+  if (rootOnBottom) {
+    translateValue += "translate(" + (-1 * (scaleFactor) * xTranslations[activeRoot]) + ")";
+  }
+
+  translateValue += " scale(" + scaleFactor +  ")";
 
   return (
     <svg
