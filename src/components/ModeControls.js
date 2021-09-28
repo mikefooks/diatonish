@@ -30,8 +30,8 @@ const ModeControls = (props) => {
 
   return (
     <div className="modeControl">
-      <div className="modeControl--label">
-        <h3>Mode</h3>
+      <div className="modeControl--options">
+          <h3>{ modeNames[activeMode] }</h3>
       </div>
       <div className="modeControl--input">
         <input type="range"
@@ -44,8 +44,8 @@ const ModeControls = (props) => {
           { displayPanes }
         </div>
       </div>
-      <div className="modeControl--options">
-          <h3>{ modeNames[activeMode] }</h3>
+      <div className="modeControl--label">
+        <h3>Mode</h3>
       </div>
     </div>
   );

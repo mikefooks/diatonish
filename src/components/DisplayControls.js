@@ -12,15 +12,39 @@ const RootOnBottomToggle = ({ changeHandler }) => {
   );
 };
 
+const RootIncrModeToggle = ({ changeHandler }) => {
+  return (
+    <div className="rootIncrModeToggle"
+          onChange={ (evt) => changeHandler(evt.target.value) }>
+      <div>
+        <h4>Root Increment</h4>
+      </div>
+      <div>
+        <label>Chromatic</label>
+        <input type="radio"
+               name="displayMode"
+               value="0"
+               defaultChecked />
+      </div>
+      <div>
+        <label>Circle of Fifths</label>
+        <input type="radio"
+               name="displayMode"
+               value="1" />
+      </div>
+    </div>
+  );
+};
+
 const DegreeModeSelector = ({ changeHandler }) => {
   return (
     <div className="scaleDegreeSelector"
          onChange={ (evt) => changeHandler(evt.target.value) }>
       <div>
-        <h4>Show Degrees</h4>
+        <h4>Degrees</h4>
       </div>
       <div>
-        <label>None</label>
+        <label>Hide</label>
         <input type="radio"
               name="degreeMode"
               value="0"
@@ -47,23 +71,23 @@ const ChordModeSelector = ({ changeHandler }) => {
     <div className="chordModeSelector"
          onChange={ (evt) => changeHandler(evt.target.value) }>
       <div>
-        <h4>Show Chord</h4>
+        <h4>Chord Type</h4>
       </div>
       <div>
-        <label>None</label>
+        <label>Hide</label>
         <input type="radio"
                name="chordMode"
                value={ 0 }
                defaultChecked />
       </div>
       <div>
-        <label>Triads</label>
+        <label>Triad</label>
         <input type="radio"
                name="chordMode"
                value={ 1 } />
       </div>
       <div>
-        <label>Sevenths</label>
+        <label>Seventh</label>
         <input type="radio"
                name="chordMode"
                value={ 2 } />
@@ -75,6 +99,7 @@ const ChordModeSelector = ({ changeHandler }) => {
 
 export {
   RootOnBottomToggle,
+  RootIncrModeToggle,
   DegreeModeSelector,
   ChordModeSelector
 };

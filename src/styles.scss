@@ -16,7 +16,7 @@ path.inactive {
   );
 }
 
-label, h3, text {
+label, h1, h3, text {
   color: #eee;
   font-family: 'Nunito', sans-serif;
 }
@@ -42,7 +42,7 @@ input[type="range"] {
 }
 
 .musicControls {
-  width: 1100px;
+  width: 85%;
 }
 
 .rootControl {
@@ -51,30 +51,37 @@ input[type="range"] {
   justify-content: space-between;
 }
 
-.rootControl--label {
-  width: 10%;
-  padding: .5em 1em;
+.appLabel {
+  padding: 1em;
+  width: 20%;
+
+  h1 {
+    margin: .5em 0;
+  }
 }
 
 .rootControl--input {
-  width: 70%;
-}
-
-.rootControl--options {
-  padding: .5em 1em;
-  text-align: right;
-  width: 20%;
+  width: 80%;
 }
 
 .modeControl {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  outline-width: 1px;
+  outline-style: dashed;
+  outline-color: #aaa;
 }
 
 .modeControl--label {
   width: 10%;
-  padding: .5em 1em;
+  padding: 1em;
+  text-align: center;
+
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: .75em;
+  }
 }
 
 .modeControl--input {
@@ -82,20 +89,34 @@ input[type="range"] {
 }
 
 .modeControl--options {
-  padding: .5em 1em;
-  text-align: center;
+  padding: 1em;
   width: 20%;
+  text-align: center;
+
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: .75em;
+  }
 }
 
 .chordControl {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  outline-width: 1px;
+  outline-style: dashed;
+  outline-color: #aaa;
 }
 
 .chordControl--label {
   width: 10%;
-  padding: .5em 1em;
+  padding: 1em;
+  text-align: center;
+
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: .75em;
+  }
 }
 
 .chordControl--input {
@@ -104,7 +125,13 @@ input[type="range"] {
 
 .chordControl--options {
   width: 20%;
+  padding: 1em;
   text-align: center;
+
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: .75em;
+  }
 }
 
 .displayPane {
@@ -129,6 +156,11 @@ input[type="range"] {
 }
 
 .displayOptions {
-  width: 300px;
+  padding-right: 1em;
+  width: 15%;
   text-align: right;
+}
+
+.rootOnBottomToggle, .rootIncrModeToggle, .scaleDegreeSelector, .chordModeSelector {
+  margin-top: .5em;
 }

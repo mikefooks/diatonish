@@ -16,7 +16,8 @@ import ChordControls from "./components/ChordControls";
 import {
   RootOnBottomToggle,
   DegreeModeSelector,
-  ChordModeSelector
+  ChordModeSelector,
+  RootIncrModeToggle
 } from "./components/DisplayControls";
 
 
@@ -46,8 +47,8 @@ const App = (props) => {
    * Toggle between Chromatic and Circle of Fifths
    * @param { Number (0 or 1) } val 
    */
-  function toggleRootDisplay(val) {
-    setState(state.set("rootDisplayMode", val));
+  function updateRootIncrMode(val) {
+    setState(state.set("rootIncrMode", val));
   }
 
   /**
@@ -131,10 +132,9 @@ const App = (props) => {
       <div className="controls">
         { /* musical parameter controls */ }
         <div className="musicControls">
-          <RootControls rootDisplayMode={ state.get("rootDisplayMode") }
+          <RootControls rootIncrMode={ state.get("rootIncrMode") }
                         activeRoot={ state.get("activeRoot") }
-                        updateRootFn={ updateRoot }
-                        updateDisplayModeFn={ toggleRootDisplay } />
+                        updateRootFn={ updateRoot } />
           <ModeControls activeMode={ state.get("activeMode") }
                         changeHandler={ updateMode } />
           <ChordControls activeRoot={ state.get("activeRoot") }
@@ -145,7 +145,8 @@ const App = (props) => {
         </div>
         { /* display controls */ }
         <div className="displayOptions">
-          <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />        
+          <RootOnBottomToggle changeHandler={ toggleRootOnBottom } />
+          <RootIncrModeToggle changeHandler={ updateRootIncrMode } />
           <DegreeModeSelector changeHandler={ selectDegreeMode } />
           <ChordModeSelector changeHandler={ selectChordMode } />
         </div>

@@ -15,12 +15,12 @@ const circleOfFifths = [
 ];
 
 const RootSlider = (props) => {
-  const { rootDisplayMode,
+  const { rootIncrMode,
           activeRoot,
           updateRootFn } = props;
 
-  const displayValues = rootDisplayMode == 0 ? chromaticScale : circleOfFifths;
-  const activeValueIdx = rootDisplayMode == 0 ?
+  const displayValues = rootIncrMode == 0 ? chromaticScale : circleOfFifths;
+  const activeValueIdx = rootIncrMode == 0 ?
                          activeRoot : circleOfFifths.indexOf(activeRoot);
 
   const displayPanes = displayValues.map((val, _) => {
@@ -45,7 +45,7 @@ const RootSlider = (props) => {
               value={ activeValueIdx }
               onChange={ (evt) => {
                 let targetVal = evt.target.valueAsNumber;
-                if (rootDisplayMode == 0) {
+                if (rootIncrMode == 0) {
                   updateRootFn(chromaticScale[targetVal]);
                 } else {
                   updateRootFn(circleOfFifths[targetVal]); 
@@ -57,43 +57,19 @@ const RootSlider = (props) => {
   );
 };
 
-const DisplayModeToggle = ({ updateDisplayModeFn }) => {
-  return (
-    <div onChange={ (evt) => updateDisplayModeFn(evt.target.value) }>
-      <div>
-        <label>Chromatic</label>
-        <input type="radio"
-               name="displayMode"
-               value="0"
-               defaultChecked />
-      </div>
-      <div>
-        <label>Circle of Fifths</label>
-        <input type="radio"
-               name="displayMode"
-               value="1" />
-      </div>
-    </div>
-  );
-};
-
 const RootControls = (props) => {
-  const { rootDisplayMode, 
+  const { rootIncrMode, 
           activeRoot,
-          updateRootFn,
-          updateDisplayModeFn } = props;
+          updateRootFn } = props;
 
   return (
     <div className="rootControl">
-      <div className="rootControl--label">
-        <h3>Root</h3>
+      <div className="appLabel">
+        <h1>diaton<i>ish</i></h1>
       </div>
-      <RootSlider rootDisplayMode={ rootDisplayMode }
+      <RootSlider rootIncrMode={ rootIncrMode }
                   activeRoot={ activeRoot }
                   updateRootFn={ updateRootFn } />
-      <div className="rootControl--options">
-        <DisplayModeToggle updateDisplayModeFn={ updateDisplayModeFn } />
-      </div>
     </div>
   );
 };

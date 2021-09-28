@@ -4,7 +4,7 @@ const defaultOctaves = 4;
 
 const defaultState = {
   // display options
-  rootDisplayMode: 0, // 0 for chromatic, 1 for circle of fifths
+  rootIncrMode: 0, // 0 for chromatic, 1 for circle of fifths
   rootOnBottom: false,
   chordMode: 0, // 0 for hide, 1 for triads, 2 for sevenths.
   degreeMode: 0, // 0 for hide, 1 for scale degrees, 2 for chord degrees.

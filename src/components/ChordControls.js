@@ -111,14 +111,14 @@ const ChordControls = (props) => {
 
   return (
     <div className="chordControl">
-      <div className="chordControl--label">
-        <h3>Chord</h3>
+      <div className="chordControl--options">
+        <h3>{ activeChordName }</h3>
       </div>
       <ChordSlider activeMode={ activeMode }
                    activeChord={ activeChord }
                    updateChordFn={ updateChordFn } />
-      <div className="chordControl--options">
-        <h3>{ activeChordName }</h3>
+      <div className="chordControl--label">
+        <h3>Chord</h3>
       </div>
     </div>
   );
