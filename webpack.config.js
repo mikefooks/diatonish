@@ -2,8 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  devtool: "eval-cheap-source-map",
-  mode: "development",
+  // devtool: "eval-cheap-source-map",
+  mode: "production",
   module: {
     rules: [{
     	test: /\.(js|jsx)$/,

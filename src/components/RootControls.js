@@ -65,7 +65,7 @@ const RootControls = (props) => {
   return (
     <div className="rootControl">
       <div className="appLabel">
-        <h1>diaton<i>ish</i></h1>
+        <h1>diaton<i>ik</i></h1>
       </div>
       <RootSlider rootIncrMode={ rootIncrMode }
                   activeRoot={ activeRoot }
