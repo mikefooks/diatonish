@@ -4,7 +4,7 @@ import React from "react";
 const RootOnBottomToggle = ({ changeHandler }) => {
   return (
     <div className="rootOnBottomToggle">
-      <label>Root on Bottom</label>
+      <label>Root Flush Left</label>
       <input name="rootOnBottom"
              type="checkbox"
              onChange={ (evt) => changeHandler(evt.target.checked) } />

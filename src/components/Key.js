@@ -14,6 +14,10 @@ function getFillColor(blackKey, isActive, chordToneIdx) {
     return "url(#inactive_fill)";
   }
 
+  if (chordToneIdx >= 0) {
+    return "rgb(218, 191, 255)";
+  }
+/*
   switch (chordToneIdx) {
     case -1:
       break;
@@ -26,6 +30,7 @@ function getFillColor(blackKey, isActive, chordToneIdx) {
     case 3:
       return "rgb(188, 251, 126)";
   }
+*/
 
   return blackKey ? "#000" : "#fff";
 }
